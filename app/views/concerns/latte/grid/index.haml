@@ -1,0 +1,27 @@
+.grid-container{ ng: { controller: 'gridController as grid' }}
+  .grid-overlay{ ng: { show: 'message.message' }}
+
+    .grid-message
+      {{ message.message }}
+      %small{ ng: { show: 'message.explanation' }}
+        {{ message.explanation }}
+      = link_to nil, class: 'btn green', 'ng-click' => 'clearMessage($event)', 'ng-show': 'message.button' do
+        Entendido
+
+  .grid
+    = render partial: 'grid'
+
+  .grid-actions
+    .row.align-middle
+      .columns.shrink
+        = link_to nil, class: 'btn blue medium', 'ng-click' => 'addRow($event)' do
+          %span.material-icons add
+
+      .columns
+        - if content_for?(:filters)
+          = content_for :filters
+
+      .columns.shrink
+        .text-right
+          = button_tag nil, class: 'btn green medium', 'ng-click' => 'save()' do
+            Guardar

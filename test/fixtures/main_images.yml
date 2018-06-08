@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  main_imageable: one
+  main_imageable_type: Main imageable
+  image: 
+  image_width: 1
+  image_height: 1
+
+two:
+  main_imageable: two
+  main_imageable_type: Main imageable
+  image: 
+  image_width: 1
+  image_height: 1

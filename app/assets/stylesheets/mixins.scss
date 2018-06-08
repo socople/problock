@@ -1,0 +1,135 @@
+@mixin border-radius($radius) {
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box-shadow($box-shadow) {
+  -moz-box-shadow: $box-shadow;
+  -ms-box-shadow: $box-shadow;
+  -webkit-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+}
+
+@mixin opacity($opacity) {
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie);
+  opacity: $opacity;
+}
+
+@mixin ratio($width, $height) {
+  position: relative;
+  max-height: $height + px;
+  max-width: $width + px;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: ($height / $width) * 100%;
+    width: 100%;
+  }
+
+  > * {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+@mixin border-image($image-url, $offset, $width: 0) {
+    @if $width == 0 {
+    $width: $offset;
+  }
+
+  border-style: solid;
+  border-width: $width + px;
+  -moz-border-image: $image-url $offset round;
+  -webkit-border-image: $image-url $offset round;
+  -o-border-image: $image-url $offset round;
+  border-image: $image-url $offset fill round;
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+@mixin transform($transformation) {
+  -ms-transform: $transformation;
+  -moz-transform: $transformation;
+  -webkit-transform: $transformation;
+  -o-transform: $transformation;
+}
+
+@mixin transform-origin($origin) {
+  -ms-transform-origin: $origin;
+  -moz-transform-origin: $origin;
+  -webkit-transform-origin: $origin;
+  -o-transform-origin: $origin;
+}
+
+@mixin checkbox-scale($scale) {
+  -ms-transform: scale($scale);
+  -moz-transform: scale($scale);
+  -webkit-transform: scale($scale);
+  -o-transform: scale($scale);
+}
+
+@mixin linear-gradient($direction, $color-stops...) {
+  // Direction has been omitted and happens to be a color-stop
+  @if is-direction($direction) == false {
+    $color-stops: $direction, $color-stops;
+    $direction: 180deg;
+  }
+
+  background: nth(nth($color-stops, 1), 1);
+  background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+  background: linear-gradient($direction, $color-stops);
+}
+
+
+@function is-direction($value) {
+  $is-keyword: index((to top, to top right, to right top, to right, to bottom right, to right bottom, to bottom, to bottom left, to left bottom, to left, to left top, to top left), $value);
+  $is-angle: type-of($value) == 'number' and index('deg' 'grad' 'turn' 'rad', unit($value));
+
+  @return $is-keyword or $is-angle;
+}
+
+@function legacy-direction($value) {
+  @if is-direction($value) == false {
+    @error "Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be a direction.";
+  }
+
+  $conversion-map: (
+    to top          : bottom,
+    to top right    : bottom left,
+    to right top    : left bottom,
+    to right        : left,
+    to bottom right : top left,
+    to right bottom : left top,
+    to bottom       : top,
+    to bottom left  : top right,
+    to left bottom  : right top,
+    to left         : right,
+    to left top     : right bottom,
+    to top left     : bottom right
+  );
+
+  @if map-has-key($conversion-map, $value) {
+    @return map-get($conversion-map, $value);
+  }
+
+  @return 90deg - $value;
+}
+
+@mixin radial-gradient ($start, $stop) {
+  background-color: $start;
+  background-image: -webkit-radial-gradient(center center, ellipse closest-corner, $start 0%, $stop 100%);
+  background-image: radial-gradient(ellipse closest-corner at center center, $start 0%, $stop 100%);
+  background-image: -ms-radial-gradient(center center, ellipse closest-corner, $start 0%, $stop 100%);
+}

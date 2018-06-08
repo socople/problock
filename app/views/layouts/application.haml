@@ -1,0 +1,14 @@
+!!! 5
+%html{ lang: I18n.locale }
+  %head
+    = display_meta_tags
+    = stylesheet_link_tag :application
+    = javascript_include_tag :application
+    = csrf_meta_tags
+
+    = render partial: 'layouts/application/analytics'
+  %body
+    = render partial: 'layouts/application/header'
+    %main
+      = yield
+    = render partial: 'layouts/application/footer'

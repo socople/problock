@@ -1,0 +1,32 @@
+.form
+  = form_for Image.new, url: '', html: { 'ng-submit' => 'uploadPic($event, file)' } do |f|
+
+    = f.hidden_field :imageable_type, { 'ng-value' => model.to_s, 'ng-model' => 'imageable_type', 'ng-init' => "imageable_type = '#{model.to_s}'" }
+    = f.hidden_field :imageable_id,   { 'ng-value' => @item.id,   'ng-model' => 'imageable_id',   'ng-init' => "imageable_id = '#{@item.id}'"     }
+    = f.hidden_field :id,             { 'ng-model' => 'id' }
+
+    .control
+      .row.align-bottom.align-justify
+        .columns.small-24.medium-11
+          .row.align-bottom
+            .columns
+              = f.file_field :image, accept: 'image/*', 'ng-required' => 'require_image', 'ng-model' => 'file', 'ngf-select' => true
+            .columns.shrink
+              %div{ 'ng-show' => 'file != null && id == \'\'' }
+                %img{ 'ngf-thumbnail' => 'file' }
+
+        .columns.small-24.medium-11
+          = f.text_area :description, 'ng-model' => 'description', rows: 2, placeholder: t('activerecord.attributes.image.description')
+
+      .row
+        .columns.small-24
+          .has-error{ 'ng-show' => 'errors.image' }
+            .help-block{ 'ng-bind' => 'errors.image[0]' }
+
+          .progress{ 'ng-show' => "file.progress >= 0 && errors == ''" }
+            .bar{ style: 'width:{{ file.progress }}%', 'ng-bind' => "file.progress + '%'" }
+
+      .row.align-middle.align-justify
+        .columns.small-24.medium-11
+        .columns.small-24.medium-11
+          = f.button 'Guardar', type: :submit

@@ -1,0 +1,31 @@
+.form
+  = form_for Attachment.new, url: '', html: { 'ng-submit' => 'uploadAttachment($event, file)' } do |f|
+
+    = f.hidden_field :attachable_type, { 'ng-value' => model.to_s, 'ng-model' => 'attachable_type', 'ng-init' => "attachable_type = '#{model.to_s}'" }
+    = f.hidden_field :attachable_id,   { 'ng-value' => @item.id,   'ng-model' => 'attachable_id',   'ng-init' => "attachable_id = '#{@item.id}'"     }
+    = f.hidden_field :id,              { 'ng-model' => 'id' }
+
+    .control
+      .row.align-bottom.align-justify
+        .columns.small-24.medium-11
+          = f.text_field :name, required: true, 'ng-model' => 'name', placeholder: t('activerecord.attributes.attachment.name')
+          .has-error{ 'ng-show' => 'errors.name' }
+            .help-block{ 'ng-bind' => 'errors.name[0]' }
+          %br
+          %br
+          = f.file_field :attachment, 'ng-required' => 'require_attachment', 'ng-model' => 'file', 'ngf-select' => true
+          .has-error{ 'ng-show' => 'errors.attachment' }
+            .help-block{ 'ng-bind' => 'errors.attachment[0]' }
+
+        .columns.small-24.medium-11
+          = f.text_area :description, 'ng-model' => 'description', rows: 4, placeholder: t('activerecord.attributes.attachment.description')
+
+      .row
+        .columns.small-24
+          .progress{ 'ng-show' => "file.progress >= 0 && errors == ''" }
+            .bar{ style: 'width:{{ file.progress }}%', 'ng-bind' => "file.progress + '%'" }
+
+      .row.align-middle.align-justify
+        .columns.small-24.medium-11
+        .columns.small-24.medium-11
+          = f.button 'Guardar', type: :submit

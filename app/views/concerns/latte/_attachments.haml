@@ -1,0 +1,28 @@
+%div{ 'ng-controller' => 'attachmentsController' }
+  = render partial: 'concerns/latte/attachments_form'
+
+  .attachments{ 'ng-init' => 'fetchAttachments()', 'data-as-sortable' => 'dragControlListeners', 'data-ng-model' => 'attachments', 'ng-photoswipe' => true }
+    %figure{ 'data-ng-repeat' => 'attachment in attachments', 'data-as-sortable-item' => true }
+
+      %a{ 'ng-href' => '{{ attachment.attachment_url }}', target: '_blank' }
+        .info
+          %strong
+            {{ attachment.name }}
+          %p
+            {{ attachment.description }}
+          %small
+            {{ attachment.extension }}
+            |
+            {{ attachment.human_size }}
+
+      .attachment-actions
+        %i.material-icons.sort{ 'data-as-sortable-item-handle' => true } code
+        %i.material-icons.edit{ 'ng-click' => 'editAttachment(attachment.id)' } create
+        %i.material-icons.remove{ 'ng-click' => 'delete(attachment.id)' } remove_circle_outline
+
+  .overlay.animate-show.animate-hide{ 'ng-show' => "showingForm('edit')" }
+    .popup
+      = link_to nil, class: 'cancel', 'ng-click' => 'hideForms($event)' do
+        %i.material-icons cancel
+
+      = render partial: 'concerns/latte/attachments_form'

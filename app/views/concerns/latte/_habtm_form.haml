@@ -1,0 +1,38 @@
+.habtm-form{ 'ng-controller' => 'habtmController' }
+  %h4
+    = t association, scope: %i[activerecord models], count: :many
+
+  %input{ type: 'hidden', name: "item[#{association}_ids][]", value: '' }
+
+  .row.align-justify
+
+    .columns.small-24.medium-11
+
+      .habtm-filter
+        %input{ type: 'text', 'ng-model' => 'available_filter.name', placeholder: 'Filtrar ...' }
+
+      .habtm-list{ 'ng-init' => "fetchAvailable('#{association}', '#{item.class.to_s.underscore}', '#{item.id}')" }
+
+        .habtm-item.available{ 'ng-repeat' => 'item in available | filter:available_filter' }
+          .row.align-middle
+            .columns {{ item.name }}
+            .columns.shrink
+              %i.material-icons{ 'ng-click' => 'add(item)' }
+                chevron_right
+
+
+    .columns.small-24.medium-11
+
+      .habtm-filter
+        %input{ type: 'text', 'ng-model' => 'enabled_filter.name', placeholder: 'Filtrar ...' }
+
+      .habtm-list{ 'ng-init' => "fetchEnabled('#{association}', '#{item.class.to_s.underscore}', '#{item.id}')" }
+
+        .habtm-item.enabled{ 'ng-repeat' => 'item in enabled | filter:enabled_filter' }
+          .row.align-middle
+            .columns
+              %input{ type: 'hidden', name: "item[#{association}_ids][]", value: '{{ item.id }}' }
+              {{ item.name }}
+            .columns.shrink
+              %i.material-icons{ 'ng-click' => 'remove(item)' }
+                remove_circle_outline

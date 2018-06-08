@@ -1,0 +1,22 @@
+!!! 5
+%html{ lang: I18n.locale }
+  %head
+    %meta{ charset: 'utf-8' }
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui' }
+    %meta{ name: 'apple-mobile-web-app-capable', content: 'yes' }
+
+    %title Latte CMS
+
+    %link{ href: image_path('latte/favicon.png'), sizes: '128x128', rel: 'shortcut icon' }
+    %link{ href: image_path('latte/favicon.png'), sizes: '128x128', rel: 'apple-touch-icon' }
+    %link{ href: image_path('latte/favicon.png'), sizes: '128x128', rel: 'apple-touch-icon-precomposed' }
+
+    = stylesheet_link_tag :latte
+    = javascript_include_tag :latte
+    = csrf_meta_tags
+
+  %body{ 'ng-app' => 'latte' }
+    = render partial: 'layouts/latte/header'
+
+    %main{ class: [controller_name, action_name] }
+      = yield

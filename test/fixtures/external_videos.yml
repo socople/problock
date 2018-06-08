@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  priority: 1
+  external_videoable: one
+  external_videoable_type: External videoable
+  url: MyString
+
+two:
+  priority: 1
+  external_videoable: two
+  external_videoable_type: External videoable
+  url: MyString

@@ -1,0 +1,342 @@
+---
+es:
+  home: Inicio
+  new: Nuevo
+  edit: Editar
+  'yes': 'Si'
+  'no': 'No'
+  from: de
+  to: a
+  deleted_record: -- Registro eliminado --
+  paper_trail:
+    create: 'creó'
+    update: 'actualizó'
+    destroy: 'eliminó'
+    rename: 'renombró'
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "La validación falló: %{errors}"
+        restrict_dependent_destroy:
+          has_one: No se puede eliminar el registro porque existe un %{record} dependiente
+          has_many: No se puede eliminar el registro porque existen %{record} dependientes
+
+    models:
+      item:
+        one: Ítem
+        other: Ítems
+      external_video:
+        one: Vídeo
+        other: Vídeos
+      recycler_dock:
+        one: Elemento eliminado
+        other: Elementos eliminados
+      activity_log:
+        one: Actividad
+        other: Registro de actividades
+      admin:
+        one: Administrador
+        other: Administradores
+      page:
+        one: Página
+        other: Páginas
+      image:
+        one: Imagen
+        other: Imágenes
+      attachment:
+        one: Archivo
+        other: Archivos
+      setting:
+        one: Configuración
+        other: Configuración
+      main_image:
+        one: Imagen principal
+        other: Imágenes principales
+      cover:
+        one: Imagen de portada
+        other: Imágenes de portada
+
+    attributes:
+      item:
+        name: Nombre
+      external_video:
+        name: Nombre
+        url: URL
+        description: Descripción
+      cover:
+        image: Imagen de portada
+      main_image:
+        image: Imagen principal
+      setting:
+        app_title: Título del sitio / sistema
+        app_description: Descripción del sitio / sistema
+        gimmick: Social gimmick
+        google_analytics_id: ID de Google Analytics
+        contact_page_id: ID página de contacto
+        smtp_host: IP o dominio servidor SMTP
+        smtp_port: Puerto servidor SMTP
+        smtp_domain: Dominio
+        smtp_sender_name: Nombre para envío de correos
+        smtp_username: Usuario servidor SMTP
+        smtp_password: Contraseña servidor SMTP
+        inbox_name: Nombre bandeja de entrada
+        inbox_email: Email bandeja de entrada
+        favicon: Favicon
+      activity_log:
+        item_type: Tipo
+        item_id: Nombre
+        whodunnit: Usuario
+        created_at: Fecha de creación o modificación
+      recycler_dock:
+        item_type: Tipo
+        item_id: Nombre
+        whodunnit: Usuario
+        created_at: Fecha de eliminación
+      admin:
+        name: Nombre
+        email: Email
+        password: Contraseña
+        password_confirmation: Confirmación de contraseña
+      page:
+        name: Nombre
+        enabled: ¿Activa?
+        priority: Prioridad
+        in_header: ¿Mostrar en header?
+        in_footer: ¿Mostrar en footer?
+        description: Descripción
+        content: Contenido
+        slug: URL amigable
+        tagging: Etiquetas
+      image:
+        description: Descripción
+        image: Imagen
+      attachment:
+        name: Nombre
+        description: Descripción
+        downloads: Descargas
+        attachment: Archivo
+
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    -
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    cday_names:
+      sunday: Domingo
+      monday: Lunes
+      tuesday: Martes
+      wednesday: Miércoles
+      thursday: Jueves
+      friday: Viernes
+      saturday: Sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %b"
+      localized: '%d/%m/%Y'
+      timestamp: '%Y%m%d'
+    month_names:
+    -
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: alrededor de 1 hora
+        other: alrededor de %{count} horas
+      about_x_months:
+        one: alrededor de 1 mes
+        other: alrededor de %{count} meses
+      about_x_years:
+        one: alrededor de 1 año
+        other: alrededor de %{count} años
+      almost_x_years:
+        one: casi 1 año
+        other: casi %{count} años
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_days:
+        one: 1 día
+        other: "%{count} días"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_months:
+        one: 1 mes
+        other: "%{count} meses"
+      x_years:
+        one: 1 año
+        other: "%{count} años"
+      x_seconds:
+        one: 1 segundo
+        other: "%{count} segundos"
+    prompts:
+      day: Día
+      hour: Hora
+      minute: Minutos
+      month: Mes
+      second: Segundos
+      year: Año
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: Debe ser aceptado
+      blank: No puede estar en blanco
+      present: Debe estar en blanco
+      confirmation: No coincide
+      empty: No puede estar vacío
+      equal_to: Debe ser igual a %{count}
+      even: Debe ser par
+      exclusion: Está reservado
+      greater_than: Debe ser mayor que %{count}
+      greater_than_or_equal_to: Debe ser mayor que o igual a %{count}
+      inclusion: No está incluido en la lista
+      invalid: No es válido
+      less_than: Debe ser menor que %{count}
+      less_than_or_equal_to: Debe ser menor que o igual a %{count}
+      model_invalid: "La validación falló: %{errors}"
+      not_a_number: No es un número
+      not_an_integer: Debe ser un entero
+      odd: Debe ser impar
+      required: Debe existir
+      taken: Ya está en uso
+      too_long:
+        one: "Es demasiado largo (1 carácter máximo)"
+        other: "Es demasiado largo (%{count} caracteres máximo)"
+      too_short:
+        one: "Es demasiado corto (1 carácter mínimo)"
+        other: "Es demasiado corto (%{count} caracteres mínimo)"
+      wrong_length:
+        one: "No tiene la longitud correcta (1 carácter exactos)"
+        other: "No tiene la longitud correcta (%{count} caracteres exactos)"
+      other_than: Debe ser distinto de %{count}
+    template:
+      body: 'Se encontraron problemas con los siguientes campos:'
+      header:
+        one: No se pudo guardar este/a %{model} porque se encontró 1 error
+        other: No se pudo guardar este/a %{model} porque se encontraron %{count} errores
+  helpers:
+    select:
+      prompt: Por favor seleccione
+    submit:
+      create: Crear %{model}
+      submit: Guardar %{model}
+      update: Actualizar %{model}
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%u%n"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: "$"
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: mil millones
+          million:
+            one: millón
+            other: millones
+          quadrillion: mil billones
+          thousand: mil
+          trillion:
+            one: billón
+            other: billones
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n %"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: " y "
+      two_words_connector: " y "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%A, %d de %B de %Y %H:%M:%S %z"
+      long: "%d de %B de %Y %H:%M"
+      short: "%d de %b %H:%M"
+      localized: '%d/%m/%Y %I:%M %p'
+      timestamp: '%Y%m%d%H%M%S'
+    pm: pm
+  will_paginate:
+    next_label: Siguiente
+    previous_label: Atrás
+    page_gap: ". . ."

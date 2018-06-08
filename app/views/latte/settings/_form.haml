@@ -1,0 +1,96 @@
+%h4
+  Configuración general
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :app_title
+    .columns.small-24.medium-18= f.text_field :app_title
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :app_description
+    .columns.small-24.medium-18= f.text_area :app_description, rows: 3
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-5= f.label :favicon
+
+    - if f.object.persisted? && f.object.favicon.present?
+      .columns.small-14= f.file_field :favicon
+      .columns.small-1.text-right
+        = link_to f.object.favicon.url, target: '_blank' do
+          %i.material-icons file_download
+      .columns.small-1.text-right
+        = f.check_box :delete_favicon, class: 'decorated-checkbox remove tooltip', title: '¿Marcar para eliminación?'
+    - else
+      .columns.small-18= f.file_field :favicon
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-5= f.label :gimmick
+
+    - if f.object.persisted? && f.object.gimmick.present?
+      .columns.small-14= f.file_field :gimmick
+      .columns.small-1.text-right
+        = link_to f.object.gimmick.url, target: '_blank' do
+          %i.material-icons file_download
+      .columns.small-1.text-right
+        = f.check_box :delete_gimmick, class: 'decorated-checkbox remove tooltip', title: '¿Marcar para eliminación?'
+    - else
+      .columns.small-18= f.file_field :gimmick
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :google_analytics_id
+    .columns.small-24.medium-18= f.text_field :google_analytics_id, placeholder: 'UA-000000000-0'
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :contact_page_id
+    .columns.small-24.medium-18= f.select :contact_page_id, @pages.map { |p| [p.name, p.id] }, { include_blank: true }
+
+%h4
+  Configuración correo saliente
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :smtp_host
+    .columns.small-24.medium-18= f.text_field :smtp_host
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :smtp_port
+    .columns.small-24.medium-18= f.text_field :smtp_port
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :smtp_domain
+    .columns.small-24.medium-18= f.text_field :smtp_domain
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :smtp_sender_name
+    .columns.small-24.medium-18= f.text_field :smtp_sender_name
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :smtp_username
+    .columns.small-24.medium-18= f.text_field :smtp_username
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :smtp_password
+    .columns.small-24.medium-18= f.text_field :smtp_password, data: { fakepass: true }
+
+%h4
+  Configuración correo entrante
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :inbox_name
+    .columns.small-24.medium-18= f.text_field :inbox_name
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :inbox_email
+    .columns.small-24.medium-18= f.text_field :inbox_email

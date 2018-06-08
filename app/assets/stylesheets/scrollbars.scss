@@ -1,0 +1,25 @@
+// /* Let's get this party started */
+::-webkit-scrollbar {
+  height: 14px;
+  width: 14px;
+}
+
+// /* Track */
+::-webkit-scrollbar-track {
+  // -webkit-box-shadow: inset 0 0 6px transparentize($black, .7);
+  // -webkit-border-radius: 10px;
+  // border-radius: 10px;
+}
+
+// /* Handle */
+::-webkit-scrollbar-thumb {
+  // -webkit-border-radius: 10px;
+  // border-radius: 10px;
+  background: lighten($blue, 10%);
+  border: 2px $white solid;
+  // -webkit-box-shadow: inset 0 0 6px transparentize($black, .5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: $blue;
+}

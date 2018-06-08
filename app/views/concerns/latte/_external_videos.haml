@@ -1,0 +1,19 @@
+%div{ 'ng-controller' => 'externalVideosController' }
+  = render partial: 'concerns/latte/external_videos_form'
+
+  .external-videos{ 'ng-init' => 'fetchExternalVideos()', 'data-as-sortable' => 'dragControlListeners', 'data-ng-model' => 'external_videos' }
+    %figure{ 'data-ng-repeat' => 'external_video in external_videos', 'data-as-sortable-item' => true }
+      %a{ 'ng-href' => '{{ external_video.url }}', 'title' => '{{ external_video.name }}', target: '_blank' }
+        %img{ 'ng-src' => '{{ external_video.thumbnail_url }}' }
+      %figcaption
+        {{ external_video.description }}
+      .external-video-actions
+        %i.material-icons.sort{ 'data-as-sortable-item-handle' => true } code
+        %i.material-icons.edit{ 'ng-click' => 'editExternalVideo(external_video.id)' } create
+        %i.material-icons.remove{ 'ng-click' => 'delete(external_video.id)' } remove_circle_outline
+
+  .overlay.animate-show.animate-hide{ 'ng-show' => "showingForm('edit')" }
+    .popup
+      = link_to nil, class: 'cancel', 'ng-click' => 'hideForms($event)' do
+        %i.material-icons cancel
+      = render partial: 'concerns/latte/external_videos_form'

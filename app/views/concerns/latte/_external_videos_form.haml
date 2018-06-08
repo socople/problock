@@ -1,0 +1,26 @@
+.form
+  = form_for ExternalVideo.new, url: '', html: { 'ng-submit' => 'saveExternalVideo($event)' } do |f|
+
+    = f.hidden_field :external_videoable_type, { 'ng-value' => model.to_s, 'ng-model' => 'external_videoable_type', 'ng-init' => "external_videoable_type = '#{model.to_s}'" }
+    = f.hidden_field :external_videoable_id,   { 'ng-value' => @item.id,   'ng-model' => 'external_videoable_id',   'ng-init' => "external_videoable_id = '#{@item.id}'"     }
+    = f.hidden_field :id,                      { 'ng-model' => 'id' }
+
+    .control
+      .row.align-bottom.align-justify
+        .columns.small-24.medium-11
+          = f.text_field :name, 'ng-model' => 'name', placeholder: t('activerecord.attributes.external_video.name')
+          .has-error{ 'ng-show' => 'errors.name' }
+            .help-block{ 'ng-bind' => 'errors.name[0]' }
+          %br
+          %br
+          = f.text_field :url, required: true, 'ng-model' => 'url', placeholder: t('activerecord.attributes.external_video.url') + ' (http://)'
+          .has-error{ 'ng-show' => 'errors.url' }
+            .help-block{ 'ng-bind' => 'errors.url[0]' }
+
+        .columns.small-24.medium-11
+          = f.text_area :description, 'ng-model' => 'description', rows: 4, placeholder: t('activerecord.attributes.external_video.description')
+
+      .row.align-middle.align-justify
+        .columns.small-24.medium-11
+        .columns.small-24.medium-11
+          = f.button 'Guardar', type: :submit

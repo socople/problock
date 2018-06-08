@@ -1,0 +1,39 @@
+%script{ type: 'text/ng-template', id: '/clear-filters.html' }
+  .clear-filters
+    = link_to nil, 'ng-click' => 'clearFilters($event)' do
+      %i.material-icons clear
+      Remover filtros
+
+%script{ type: 'text/ng-template', id: '/date-filter-from-template.html' }
+  .date-range-picker-container
+    %span{ 'ng-click' => 'showCalendarPicker($event)', 'ng-class' => "string2date(params.filter()[name]) ? 'has-content' : null" }
+      {{ (string2date(params.filter()[name]) | date:'dd/MM/yyyy') || 'Desde' }}
+    %mighty-datepicker.date-range-picker{ name: '{{name}}', 'ng-disabled' => '$filterRow.disabled', 'ng-model' => "params.filter()[name]", options: 'dateRangePickerOptions', 'range-from' => 'true', before: "params.filter()[name.replace('_gteq', '_lteq')]" }
+
+%script{ type: 'text/ng-template', id: '/date-filter-to-template.html' }
+  .date-range-picker-container
+    %span{ 'ng-click' => 'showCalendarPicker($event)', 'ng-class' => "string2date(params.filter()[name]) ? 'has-content' : null" }
+      {{ (string2date(params.filter()[name]) | date:'dd/MM/yyyy') || 'Hasta' }}
+    %mighty-datepicker.date-range-picker{ name: '{{name}}', 'ng-disabled' => '$filterRow.disabled', 'ng-model' => "params.filter()[name]", options: 'dateRangePickerOptions', 'range-to' => 'true', after: "params.filter()[name.replace('_lteq', '_gteq')]" }
+
+.table-container
+  %table{ ng: { table: 'table.tableParams', table_columns_binding: 'table.cols' }}
+    %tr{ ng: { repeat: 'item in $data' }}
+
+      %td{ data: { title: "'Tipo'" }, 'ng-if' => 'true' } {{ item.item_type }}
+
+      %td{ data: { title: "'Nombre o contenido'" }, 'ng-if' => 'true', filter: "{ object_icont: 'text' }" } {{ item.item_id }}
+
+      %td{ data: { title: "'Usuario'" }, 'ng-if' => 'true', filter: "{ admin_name_icont: 'text' }", sortable: "'admin_name'" } {{ item.whodunnit }}
+
+      %td{ data: { title: "'Fecha de eliminación'" }, 'ng-if' => 'true', filter: "table.dateFilter('created_at')", sortable: "'created_at'" } {{ item.created_at | date:'dd/MM/yy hh:mm a' }}
+
+      %td{ data: { title: '', filter: "{ actions: '/clear-filters.html' }" }}
+        .action-buttons
+          = link_to "#{model.to_s.pluralize.underscore}/{{ item.id }}", class: 'text-primary' do
+            %i.material-icons remove_red_eye
+            Ver
+
+          = link_to "#{model.to_s.pluralize.underscore}/{{ item.id }}/restore", class: 'text-success' do
+            %i.material-icons restore
+            Restaurar

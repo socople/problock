@@ -1,0 +1,43 @@
+%section{ ng: { controller: 'tableController as table' }}
+  .header
+    .row.align-middle
+      .columns
+        %h1
+          %i.material-icons list
+          = t model.to_s.underscore, scope: 'activerecord.models', count: :many
+      .columns.shrink
+        - if model.respond_to?(:grid?)
+          = link_to send("latte_grid_#{model.to_s.underscore.pluralize}_url") do
+            %i.material-icons add_circle_outline
+            %br
+            Edición múltiple
+
+        - if policy(model).new?
+          = link_to url_for(action: :new) do
+            %i.material-icons add_circle_outline
+            %br
+            Nuevo
+
+        = link_to '{{ apiUrl() }}' do
+          %i.material-icons file_download
+          %br
+          Exportar
+
+  .breacrumb
+    = render_breadcrumbs separator: ' / '
+
+  .container
+
+    - if flash[:destroyed]
+      .alert.success
+        Registro eliminado correctamente
+
+    - if flash[:restored]
+      .alert.success
+        Registro restaurado correctamente
+        = link_to flash[:restored], target: '_blank' do
+          Ver registro restaurado
+          %i.material-icons open_in_new
+
+    = render partial: 'actions'
+    = render partial: 'table'

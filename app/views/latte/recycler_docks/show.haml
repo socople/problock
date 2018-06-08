@@ -1,0 +1,34 @@
+:ruby
+  skip = [:id, :created_at, :updated_at, :current_sign_in_at,
+          :last_sign_in_at, :encrypted_password,
+          :sign_in_count, :remember_created_at]
+%section
+  .header
+    .row.align-middle
+      .columns
+        %h1
+          %i.material-icons list
+          = t model.to_s.underscore, scope: 'activerecord.models', count: :many
+      .columns.shrink
+        = link_to url_for(action: :restore) do
+          %i.material-icons restore
+          %br
+          Restaurar
+
+  .breacrumb
+    = render_breadcrumbs separator: ' / '
+    \/
+    Registro eliminado por
+    = @version.decorate.whodunnit
+    el
+    = l @version.decorate.created_at, format: :localized
+
+  .container.medium
+    %table.ng-table.info
+      - @version.yobject.each do |key, val|
+        - next if skip.include?(key.to_sym)
+        %tr
+          %th
+            = t("activerecord.attributes.#{@version.item_type.underscore}.#{key}") + ':'
+          %td
+            = parsed_by_type key, val

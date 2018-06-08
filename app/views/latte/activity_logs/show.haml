@@ -1,0 +1,23 @@
+%section
+  .header
+    .row.align-middle
+      .columns
+        %h1
+          %i.material-icons list
+          = t model.to_s.underscore, scope: 'activerecord.models', count: :many
+
+  .breacrumb
+    = render_breadcrumbs separator: ' / '
+    \/
+    Registro guardado por
+    = @version.decorate.whodunnit
+    el
+    = l @version.decorate.created_at, format: :localized
+
+  .container.medium
+    %table.ng-table.info
+      - @version.changeset.each do |attribute, changes|
+        - if show_diff?(attribute)
+          .diff-container
+            %em= t ['activerecord.attributes', @version.item_type.underscore, attribute].join('.')
+            = raw Diffy::Diff.new(parsed_by_type(attribute, changes.first), parsed_by_type(attribute, changes.last)).to_s(:html)

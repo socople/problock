@@ -1,0 +1,106 @@
+.header
+  .row.align-middle
+    .columns
+      %h1
+        %i.material-icons input
+        = t model.to_s.underscore, scope: 'activerecord.models', count: 1
+    .columns.shrink
+      - unless @item.new_record?
+
+        - if policy(model).new?
+          = link_to url_for(action: :new) do
+            %i.material-icons add_circle_outline
+            %br
+            Nuevo
+
+        - if policy(@item).destroy?
+          = link_to url_for(action: :destroy), method: :delete, data: { confirm: '¿Está seguro?' } do
+            %i.material-icons.danger delete
+            %br
+            Eliminar
+
+.breacrumb
+  = render_breadcrumbs separator: ' / '
+
+.wrapper
+  .row.align-center
+    .columns.small-24.medium-24.large-16
+      .container
+        - if @item.errors.any?
+          .alert.error
+            No se pudo guardar el registro, por favor, revise los campos del formulario
+
+        - if flash[:saved]
+          .alert.success
+            Registro guardado correctamente
+
+        .tabs
+          = link_to nil, class: 'active', data: { tab: '#general' } do
+            Información general
+
+          - if model.respond_to?(:gallery?) && @item.persisted?
+            = link_to nil, data: { tab: '#gallery' } do
+              Galería de imágenes
+
+          - if model.respond_to?(:attachments?) && @item.persisted?
+            = link_to nil, data: { tab: '#attachments' } do
+              Archivos
+
+          - if model.respond_to?(:external_videos?) && @item.persisted?
+            = link_to nil, data: { tab: '#evideos' } do
+              Vídeos
+
+        #general
+          = form_for [:latte, @item], as: :item do |f|
+            .form
+              = render partial: 'form', locals: { f: f }
+              .control
+                .row.align-center.align-justify
+                  .columns.small-24.medium-5
+                  .columns.small-24.medium-18
+                    = f.button type: :submit do
+                      %i.material-icons save
+                      Guardar
+
+        - if model.respond_to?(:gallery?) && @item.persisted?
+          #gallery
+            = render partial: 'concerns/latte/gallery'
+
+        - if model.respond_to?(:attachments?) && @item.persisted?
+          #attachments
+            = render partial: 'concerns/latte/attachments'
+
+        - if model.respond_to?(:external_videos?) && @item.persisted?
+          #evideos
+            = render partial: 'concerns/latte/external_videos'
+
+    - if @item.respond_to?(:versions)
+      .columns.small-24.medium-24.large-8
+        .container
+          .versions
+            %h1
+              Actividad
+
+            - if @item.versions.any?
+              %ul
+                - @item.versions.reverse.each do |version|
+                  %li
+                    .row
+                      .columns.shrink
+                        %i.material-icons{ class: version.event }
+                          = (version.event == 'create' ? 'add' : (version.event == 'update' ? 'update' : 'compare_arrows' ))
+                      .columns
+                        = link_to latte_version_url(version), remote: true, data: { xhrpopup: true } do
+                          = version.admin.try(:name) || 'Sistema'
+                          %small
+                            = t "paper_trail.#{version.event}"
+                          = version.rename_or_name(' » ')
+                      .columns.shrink
+                        %em{ class: version.locale }
+                          = version.locale
+                      .columns.shrink
+                        %small
+                          = l version.created_at, format: :localized
+            - else
+              .empty
+                \-- Aún no hay actividad --

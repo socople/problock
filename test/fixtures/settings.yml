@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contact_page_id: 1
+  smtp_host: MyString
+  smtp_port: 1
+  smtp_domain: MyString
+  smtp_username: MyString
+  smtp_password: MyString
+  smtp_sender_name: MyString
+  inbox_name: MyString
+  inbox_email: MyString
+  google_analytics_id: MyString
+  gimmick: 
+
+two:
+  contact_page_id: 1
+  smtp_host: MyString
+  smtp_port: 1
+  smtp_domain: MyString
+  smtp_username: MyString
+  smtp_password: MyString
+  smtp_sender_name: MyString
+  inbox_name: MyString
+  inbox_email: MyString
+  google_analytics_id: MyString
+  gimmick: 

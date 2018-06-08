@@ -1,0 +1,12 @@
+.overlay
+  .popup
+
+    = link_to nil, class: 'close', data: { close: true } do
+      %i.material-icons cancel
+
+    .scolled-container
+      - @version.changeset.each do |attribute, changes|
+        - if show_diff?(attribute)
+          .diff-container
+            %em= t ['activerecord.attributes', @version.item_type.underscore, attribute].join('.')
+            = raw Diffy::Diff.new(parsed_by_type(attribute, changes.first), parsed_by_type(attribute, changes.last)).to_s(:html)

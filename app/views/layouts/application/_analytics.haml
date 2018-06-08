@@ -1,0 +1,8 @@
+- if Rails.env.production?
+  - unless Setting.google_analytics_id.blank?
+    = javascript_include_tag "https://www.googletagmanager.com/gtag/js?id=#{Setting.google_analytics_id}", true
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '#{Setting.google_analytics_id}');

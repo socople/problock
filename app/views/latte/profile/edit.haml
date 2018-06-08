@@ -1,0 +1,47 @@
+.header
+  .row.align-middle
+    .columns
+      %h1
+        %i.material-icons input
+        = t model.to_s.underscore, scope: 'activerecord.models', count: 1
+
+.breacrumb
+  = render_breadcrumbs separator: ' / '
+
+.wrapper
+  .row.align-center
+    .columns.large-20
+      .container
+        - if @user.errors.any?
+          .alert.error
+            No se pudo guardar el registro, por favor, revise los campos del formulario
+
+        - if flash[:saved]
+          .alert.success
+            Registro guardado correctamente
+
+        = form_for @user, url: latte_profile_path(@user.id), method: :put do |f|
+          .form
+
+            .control
+              .row.align-middle.align-justify
+                .columns.small-5= f.label :name
+                .columns.small-18= f.text_field :name
+
+            .control
+              .row.align-middle.align-justify
+                .columns.small-5= f.label :password
+                .columns.small-18= f.password_field :password
+
+            .control
+              .row.align-middle.align-justify
+                .columns.small-5= f.label :password_confirmation
+                .columns.small-18= f.password_field :password_confirmation
+
+            .control
+              .row.align-center.align-justify
+                .columns.small-5
+                .columns.small-18
+                  = f.button type: :submit do
+                    %i.material-icons save
+                    Guardar

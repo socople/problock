@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css?family=Squada+One');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import 'foundation';
+@import 'slick';
+
+$black: #343434;
+$gray: #f2f2f2;
+$yellow: #ff8a00;
+$white: #fff;
+
+.container {
+  margin: 0 auto;
+  max-width: 1046px;
+  padding: 0 1em;
+}
+
+a {
+  color: inherit;
+  display: inline-block;
+  text-decoration: none;
+}
+
+h1,
+h3 {
+  font-family: 'Squada One', cursive;
+  font-weight: normal;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 4.8em;
+}
+
+h3 {
+  font-size: 2.8em;
+  margin: .4em 0;
+}
+
+h4 {
+  font-size: 1.8em;
+  font-weight: normal;
+  margin: 0;
+}
+
+.btn {
+  background: $yellow;
+  border-bottom: $black 3px solid;
+  border-radius: .5em;
+  color: $white;
+  font-family: 'Squada One', cursive;
+  font-size: 1.5em;
+  height: 2.4em;
+  line-height: 2.4;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+
+  &.flat {
+    background: transparent;
+    border: 1px $black solid;
+    color: $black;
+  }
+}
+
+.panels {
+  background: $white image-url('bg-panel.png') 1em 1.5em no-repeat;
+  padding: 1em 2em 1em 3em;
+  position: relative;
+  z-index: 2;
+
+  .controls {
+    text-align: right;
+
+    a {
+      margin: 0 0 0 .5em;
+    }
+  }
+}
+
+body {
+  background: $gray;
+  color: $black;
+  font-family: 'Open Sans', sans-serif;
+}
+
+header {
+  background: $white;
+
+  h2 {
+    font-size: .9em;
+    font-weight: normal;
+    margin: 0;
+  }
+
+  ul,
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    align-items: baseline;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  li {
+    padding: 1em 0;
+  }
+
+  a,
+  .group {
+    font-family: 'Squada One', cursive;
+    line-height: 1.1;
+    font-size: 1.2em;
+    text-transform: uppercase;
+  }
+
+  .group {
+    background: $yellow;
+    color: $white;
+    height: 1.6em;
+    line-height: 1.8;
+    padding: 0 .5em;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+    }
+
+    &::before {
+      border-top: 8px solid $white;
+      border-right: 8px $yellow solid;
+      left: 0;
+      top: 0;
+    }
+
+    &::after {
+      border-bottom: 8px solid $white;
+      border-left: 8px $yellow solid;
+      bottom: 0;
+      right: 0;
+    }
+
+    a {
+      font-size: 1em;;
+    }
+
+    img {
+      vertical-align: top;
+    }
+  }
+}
+
+.home-1 {
+  background: image-url('bg-home-1.png') right top no-repeat;
+  background-size: auto 98%;
+  margin: 0 0 11px;
+  padding: 2em 0 6em;
+  position: relative;
+
+  &::after {
+    background: $yellow;
+    bottom: -11px;
+    content: '';
+    height: 22px;
+    left: 0;
+    position: absolute;
+    width: 330px;
+  }
+
+  img {
+    max-width: 188px;
+  }
+
+  h1 {
+    margin: .5em 0 0;
+  }
+
+  p {
+    font-size: 1.3em;
+    margin: 1em 0;
+  }
+}
+
+.home-2 {
+  padding: 2em 0;
+
+  .container {
+    padding: 0 0 12em;
+    position: relative;
+  }
+
+  .background {
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+}

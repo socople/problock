@@ -1,0 +1,9 @@
+.row.align-middle
+  .columns.shrink
+    %strong.total-entries{ 'ng-bind' => "total_entries + ' Registros'" }
+
+  .columns
+    .visibility-controls
+      = label_tag nil, 'ng-repeat' => 'col in table.cols' do
+        %input{ type: :checkbox, ng: { model_options: "{ getterSetter: true }", model: 'col.show' }}
+        %span {{ col.title() }}

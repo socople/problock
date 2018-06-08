@@ -1,0 +1,36 @@
+%header
+  .row.align-middle
+    .columns.shrink
+      %span.menu.drop
+        %i.material-icons menu
+        %ul
+          %li
+            = link_to latte_root_url do
+              %i.material-icons home
+              Inicio
+
+          - menu_models.each do |model|
+            %li
+              = link_to send("latte_#{model.underscore.pluralize}_url") do
+                %i.material-icons keyboard_arrow_right
+                = t model.underscore.singularize, scope: 'activerecord.models', count: :many
+
+          %li
+            = link_to latte_recycler_docks_url do
+              %i.material-icons delete
+              = t 'activerecord.models.recycler_dock', count: :many
+
+          %li
+            = link_to edit_latte_settings_url do
+              %i.material-icons settings
+              = t 'activerecord.models.setting', count: :many
+
+    .columns
+      Latte CMS
+    -# - if current_admin.admin?
+    -#   .columns.shrink
+    -#     = switch_user_select
+    .columns.shrink.large-offset-1
+      = link_to current_admin.name, edit_latte_profile_url(current_admin)
+      = link_to destroy_admin_session_url, method: :delete do
+        %i.material-icons power_settings_new

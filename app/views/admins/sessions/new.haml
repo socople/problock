@@ -1,0 +1,29 @@
+!!! 5
+%html{ lang: I18n.locale }
+  %head
+    %meta{ charset: 'utf-8' }
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui' }
+    %meta{ name: 'apple-mobile-web-app-capable', content: 'yes' }
+
+    %title Latte CMS
+
+    %link{ href: image_path('latte/favicon.png'), sizes: '128x128', rel: 'shortcut icon' }
+    %link{ href: image_path('latte/favicon.png'), sizes: '128x128', rel: 'apple-touch-icon' }
+    %link{ href: image_path('latte/favicon.png'), sizes: '128x128', rel: 'apple-touch-icon-precomposed' }
+
+    = stylesheet_link_tag :latte
+    = csrf_meta_tags
+  %body.login
+    .branding
+      = image_tag 'latte/latte.png'
+      Latté CMS
+    .form
+      %p Bienvenido de nuevo!
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .control
+          = f.email_field :email, autofocus: true, placeholder: 'Email'
+        .control
+          = f.password_field :password, autocomplete: 'off', placeholder: 'Contraseña'
+        .control
+          = f.button type: :submit, name: nil, class: 'btn' do
+            Ingresar

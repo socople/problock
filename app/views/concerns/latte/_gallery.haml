@@ -1,0 +1,25 @@
+%div{ 'ng-controller' => 'galleryController' }
+  = render partial: 'concerns/latte/gallery_form'
+
+  .gallery{ 'ng-init' => 'fetchImages()', 'data-as-sortable' => 'dragControlListeners', 'data-ng-model' => 'images' }
+    %figure{ 'data-ng-repeat' => 'image in images', 'data-as-sortable-item' => true }
+      %a{ 'ng-href' => '{{ image.image_urls.original }}', 'data-size' => '{{ image.image_width }}x{{ image.image_height }}' }
+        %img{ 'ng-src' => '{{ image.image_urls.small }}' }
+      %figcaption
+        {{ image.description }}
+      .image-actions
+        %i.material-icons.sort{ 'data-as-sortable-item-handle' => true } code
+        %i.material-icons.edit{ 'ng-click' => 'editImage(image.id)' } create
+        %i.material-icons.remove{ 'ng-click' => 'delete(image.id)' } remove_circle_outline
+
+  = render partial: 'layouts/latte/photoswipe'
+  :javascript
+    initPhotoSwipeFromDOM('.gallery')
+
+  .overlay.animate-show.animate-hide{ 'ng-show' => "showingForm('edit')" }
+    .popup
+      = link_to nil, class: 'cancel', 'ng-click' => 'hideForms($event)' do
+        %i.material-icons cancel
+
+      %img.preview{ 'ng-src' => '{{ image_url }}', 'ngf-thumbnail' => 'file' }
+      = render partial: 'concerns/latte/gallery_form'

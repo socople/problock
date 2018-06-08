@@ -1,0 +1,13 @@
+.control
+  .row.align-middle.align-justify
+    .columns.small-5= f.label :image
+
+    - if f.object.persisted? && f.object.image.present?
+      .columns.small-14= f.file_field :image
+      .columns.small-1.text-right
+        = link_to f.object.image.url, target: '_blank' do
+          %i.material-icons file_download
+      .columns.small-1.text-right
+        = f.check_box :_destroy, class: 'decorated-checkbox remove tooltip', title: '¿Marcar para eliminación?'
+    - else
+      .columns.small-18= f.file_field :image
