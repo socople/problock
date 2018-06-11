@@ -27,7 +27,7 @@
           %h3 Proyectos
           .slider
             - (1..3).to_a.each do |i|
-              .panel{ data: { slide: i } }
+              .slide{ data: { slide: i } }
                 %h4 San Gabriel #{i}
                 %p
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -40,3 +40,58 @@
 
             = link_to nil, class: 'slick-next' do
               = image_tag 'slick-next.png'
+
+.home-3
+  .container
+    .row.align-justify
+      .columns.large-6
+        .panel
+          %h3 Productos
+          %p
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Cras ultrices turpis nec mauris molestie, sed dignissim sapien
+            bibendum. Etiam urna erat, facilisis congue molestie non,
+            placerat porta erat.
+          = link_to nil, class: 'btn' do
+            Ver más materiales
+
+      .columns.large-6
+        = link_to nil, class: 'product' do
+          %figure
+            = image_tag 'icon-blocks.png'
+            %figcaption
+              Bloques
+
+      .columns.large-6
+        = link_to nil, class: 'product' do
+          %figure
+            = image_tag 'icon-tubos.png'
+            %figcaption
+              Tubos
+
+      .columns.large-6
+        = link_to nil, class: 'product' do
+          %figure
+            = image_tag 'icon-aridos.png'
+            %figcaption
+              Áridos
+
+.home-4
+  .container
+    .row
+      .columns.large-10.large-offset-14
+        .panels
+          %h3 Visítenos
+          %p
+            Horarios:
+            %br
+            %strong
+              7am a 7pm de lunes a viernes
+          %p
+            Dirección
+            %br
+            %strong
+              Carretera a La Unión Km 147 1/2 cantón Miraflores,
+              San Miguel, El Salvador.
+          = link_to nil, class: 'btn' do
+            Escríbanos

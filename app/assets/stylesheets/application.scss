@@ -8,10 +8,18 @@ $gray: #f2f2f2;
 $yellow: #ff8a00;
 $white: #fff;
 
+.row {
+  max-width: none;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1046px;
   padding: 0 1em;
+}
+
+figure {
+  margin: 0;
 }
 
 a {
@@ -65,7 +73,7 @@ h4 {
 
 .panels {
   background: $white image-url('bg-panel.png') 1em 1.5em no-repeat;
-  padding: 1em 2em 1em 3em;
+  padding: 1em 3em;
   position: relative;
   z-index: 2;
 
@@ -75,6 +83,16 @@ h4 {
     a {
       margin: 0 0 0 .5em;
     }
+  }
+}
+
+.panel {
+  background: image-url('bg-panel.png') 0 0 no-repeat;
+  padding: 0 0 1em 2em;
+
+  h3 {
+    margin: 0;
+    padding: .2em 0 0;
   }
 }
 
@@ -193,7 +211,8 @@ header {
   padding: 2em 0;
 
   .container {
-    padding: 0 0 12em;
+    background: image-url('icon-block.png') left bottom no-repeat;
+    padding: 0 1em 12em;
     position: relative;
   }
 
@@ -203,9 +222,76 @@ header {
     background-size: auto 100%;
     bottom: 0;
     left: 0;
+    margin: 0 1em;
     position: absolute;
     right: 0;
     top: 0;
     z-index: 1;
+  }
+}
+
+.home-3 {
+  background: image-url('bg-home-3.png');
+  padding: 5em 0;
+
+  .product {
+    display: block;
+  }
+
+  figure {
+    background: $yellow;
+    margin: 0 0 0 2em;
+    padding: 5em 0 0;
+    position: relative;
+    text-align: center;
+
+    &::before {
+      border-right: 28px $yellow solid;
+      border-top: 28px solid darken($white, 10%);
+      content: '';
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 0;
+    }
+  }
+
+  figcaption {
+    background: $white;
+    box-shadow: 0 .3em .5em 0 transparentize($black, .8);
+    font-family: 'Squada One', cursive;
+    font-size: 1.9em;
+    line-height: 1;
+    margin: 2.4em 0 0;
+    padding: .5em;
+    text-transform: uppercase;
+  }
+
+  img {
+    max-height: 110px;
+  }
+
+  p {
+    font-size: .9em;
+  }
+
+  .btn {
+    margin: 1em 0 0;
+  }
+}
+
+.home-4 {
+  padding: 3em 0 5em;
+
+  .container {
+    background: image-url('bg-home-4.png') 1em top no-repeat;
+    background-size: auto 100%;
+    padding: 0 1em 9em;
+  }
+
+  .btn {
+    margin: .6em 0 1em;
+    padding: 0 2.2em;
+    width: auto;
   }
 }

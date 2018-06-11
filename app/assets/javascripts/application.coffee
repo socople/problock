@@ -24,5 +24,5 @@ $ ->
 
   slider.on 'beforeChange', (slick, currentSlide, prevSlide, nextSlide) ->
     $('.background').fadeOut()
-    bg = $("[data-slick-index=#{nextSlide}]").find('.panel').data('slide')
+    bg = $("[data-slick-index=#{nextSlide}]").find('.slide').data('slide')
     $("[data-background=#{bg}]").fadeIn()
