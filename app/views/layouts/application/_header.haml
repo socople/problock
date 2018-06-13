@@ -1,16 +1,40 @@
-%header
-  .container
-    %ul
-      %li
-        %h2 San Miguel, El Salvador.
-      %li
-        = link_to 'Quiénes somos', nil
-      %li
-        = link_to 'Productos', nil
-      %li
-        = link_to 'Proyectos', nil
-      %li
-        .group
-          %span Llámenos
-          = link_to '2641-5090', 'tel:2641-5090'
-          = link_to image_tag('icon-mail.png'), nil
+- if controller_name == 'home'
+  %header
+    .container
+      %ul
+        %li
+          %h2 San Miguel, El Salvador.
+        %li
+          = link_to 'Quiénes somos', nil
+        %li
+          = link_to 'Productos', products_url
+        %li
+          = link_to 'Proyectos', nil
+        %li
+          .group
+            %span Llámenos
+            = link_to '2641-5090', 'tel:2641-5090'
+            = link_to image_tag('icon-mail.png'), nil
+
+- else
+  %header.i
+    .container
+      %ul
+        %li
+          = link_to root_url do
+            = image_tag 'problock.png'
+        %li
+          = link_to 'Inicio', root_url
+        %li
+          = link_to 'Quiénes somos', nil
+        %li
+          = link_to 'Productos', products_url
+        %li
+          = link_to 'Proyectos', nil
+        %li
+          %span
+            San Miguel, El Salvador
+          .group
+            %span Llámenos
+            = link_to '2641-5090', 'tel:2641-5090'
+            = link_to image_tag('icon-mail.png'), nil

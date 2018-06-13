@@ -1,0 +1,34 @@
+.products
+  .container
+    .breadcrumb
+      = render_breadcrumbs separator: ' / '
+
+    .cover
+      %h1 Productos
+      .tabs
+        = link_to 'Bloques', nil, class: 'active'
+        = link_to 'Tubos', nil
+        = link_to 'Áridos', nil
+        = link_to 'Grava', nil
+        = link_to 'Arena', nil
+
+    .filters
+      = link_to 'Todos', nil, class: 'active'
+      = link_to 'Bloques', nil
+      = link_to 'Soleras', nil
+      = link_to 'Dados', nil
+
+
+    .row.align-spaced
+      - 9.times do
+        .columns.small-22.medium-9.large-7
+          .product
+            = image_tag 'samples/4.png'
+            %h2
+              Bloques de 10
+            %p
+              \- Bloques de concreto de 10cm.
+              %br
+              \- Pego Blanco.
+              %br
+              \- Pego Gris.

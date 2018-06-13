@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   root to: 'home#index'
+  resources :products, only: %i[index]
   resources :pages, only: %i[show]
 
   namespace :latte do
