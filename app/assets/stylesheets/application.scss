@@ -102,6 +102,36 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+footer {
+  background: darken($white, 67%);
+  color: $white;
+  padding: 2.5em 0 2em;
+
+  a {
+    font-family: 'Squada One', cursive;
+    font-size: 2em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  span {
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: .8em;
+    text-transform: none;
+  }
+
+  .facebook {
+    background: image-url('icon-fb.png') left center no-repeat;
+    padding: 0 0 0 2em;
+  }
+
+  .phone {
+    background: image-url('icon-phone.png') left center no-repeat;
+    padding: 0 0 0 1.6em;
+  }
+}
+
 header {
   background: $white;
 
@@ -281,7 +311,7 @@ header {
 }
 
 .home-4 {
-  padding: 3em 0 5em;
+  padding: 3em 0 4em;
 
   .container {
     background: image-url('bg-home-4.png') 1em top no-repeat;

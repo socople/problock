@@ -1,2 +1,18 @@
 %footer
-  Footer
+  .container
+    .row.align-middle
+      .columns.large-13
+        = link_to root_url do
+          = image_tag 'problock-white.png'
+
+      .columns.large-6
+        = link_to 'https://www.facebook.com/problock1', target: '_blank', class: 'facebook' do
+          Facebook
+          %span
+            \/problock1
+
+      .columns.large-5
+        = link_to 'tel:2641-5090', target: '_blank', class: 'phone' do
+          Llámenos
+          %span
+            2641-5090
