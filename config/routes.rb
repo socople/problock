@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
   resources :products, only: %i[index]
+  resources :projects, only: %i[index]
   resources :pages, only: %i[show]
 
   namespace :latte do

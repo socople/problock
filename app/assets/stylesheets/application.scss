@@ -3,6 +3,9 @@
 @import 'foundation';
 @import 'slick';
 
+$normal: 400;
+$bold: 700;
+
 $black: #343434;
 $gray: #f2f2f2;
 $purple: #4577be;
@@ -101,6 +104,10 @@ body {
   background: $gray;
   color: $black;
   font-family: 'Open Sans', sans-serif;
+
+  &.noscroll {
+    overflow: hidden;
+  }
 }
 
 footer {
@@ -185,8 +192,8 @@ header {
   a,
   .group {
     font-family: 'Squada One', cursive;
-    line-height: 1.1;
     font-size: 1.2em;
+    line-height: 1.1;
     text-transform: uppercase;
   }
 
@@ -206,8 +213,8 @@ header {
     }
 
     &::before {
-      border-top: 8px solid $white;
       border-right: 8px $yellow solid;
+      border-top: 8px solid $white;
       left: 0;
       top: 0;
     }
@@ -220,7 +227,7 @@ header {
     }
 
     a {
-      font-size: 1em;;
+      font-size: 1em;
     }
 
     img {
@@ -260,7 +267,8 @@ header {
   }
 }
 
-.home-2 {
+.home-2,
+.product-detail {
   padding: 2em 0;
 
   .container {
@@ -280,6 +288,14 @@ header {
     right: 0;
     top: 0;
     z-index: 1;
+  }
+}
+
+.product-detail {
+  padding: 0;
+
+  .container {
+    background: transparent;
   }
 }
 
@@ -451,5 +467,109 @@ header {
     p {
       margin: .5em 0;
     }
+  }
+}
+
+.prefooter {
+  padding: 2em 1em 3em;
+  text-align: center;
+
+  strong,
+  .tel {
+    font-family: 'Squada One', cursive;
+    font-weight: normal;
+    line-height: 1;
+    margin: .2em 0 0;
+  }
+
+  strong {
+    display: block;
+    font-size: 1.8em;
+  }
+
+  .tel {
+    background: image-url('icon-phone-color.png') left center no-repeat;
+    font-size: 1.5em;
+    padding: .5em 0 .5em 1.8em;
+    text-transform: uppercase;
+  }
+
+  .btn {
+    margin: 1em 0;
+    max-width: 216px;
+  }
+}
+
+.projects {
+  background: $white;
+  padding: 0 0 4em;
+
+  h1 {
+    background: image-url('bg-h1.png') left bottom no-repeat;
+    font-size: 3.4em;
+    margin: 0;
+    padding: 0 0 .3em;
+  }
+}
+
+.project {
+  border-radius: 1em;
+  box-shadow: 0 .4em 2em .1em transparentize($black, .8);
+  margin: 2em 1em;
+  padding: 2em;
+  position: relative;
+
+  &::after {
+    background: $yellow;
+    bottom: -11px;
+    content: '';
+    display: block;
+    height: 11px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    width: 118px;
+  }
+
+  h2 {
+    color: lighten($black, 10%);
+    font-size: 2em;
+    margin: .5em 0 0;
+  }
+
+  p {
+    margin: .5em 0 1em;
+  }
+
+  .more {
+    color: $purple;
+    font-size: 1.2em;
+    font-weight: $bold;
+  }
+}
+
+.overlay {
+  background: transparentize($black, .1);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 3;
+
+  .popup {
+    left: 50%;
+    max-width: 1046px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -60%);
+    width: 90%;
+  }
+
+  .close {
+    position: absolute;
+    right: 2em;
+    top: 1em;
+    z-index: 4;
   }
 }

@@ -1,0 +1,27 @@
+.projects
+  .container
+    .breadcrumb
+      = render_breadcrumbs separator: ' / '
+
+    %h1 Proyectos
+    %p
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet
+      lorem sed enim placerat pellentesque. Aliquam gravida nunc justo, sit
+      amet iaculis nunc blandit vitae.
+
+    .row.align-spaced
+      - 4.times do
+        .columns.large-11
+          .project
+            %figure
+              = link_to nil do
+                = image_tag 'samples/1.png'
+            %h2
+              = link_to 'San Gabriel', nil
+            %p
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Nulla sit amet lorem sed enim placerat pellentesque.
+            = link_to nil, class: 'more' do
+              Leer más
+
+= render partial: 'detail'

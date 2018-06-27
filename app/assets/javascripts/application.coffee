@@ -26,3 +26,12 @@ $ ->
     $('.background').fadeOut()
     bg = $("[data-slick-index=#{nextSlide}]").find('.slide').data('slide')
     $("[data-background=#{bg}]").fadeIn()
+
+
+  $('[data-open]').on 'click', (e) ->
+    e.preventDefault()
+    $('[data-popup=' + $(this).data('open') + ']').fadeIn()
+
+  $('[data-close]').on 'click', (e) ->
+    e.preventDefault()
+    $('[data-popup=' + $(this).data('close') + ']').fadeOut()

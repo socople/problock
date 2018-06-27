@@ -24,7 +24,7 @@
     .row
       .columns.large-10
         .panels
-          %h3 Proyectos
+          %h3= link_to 'Proyectos', projects_url
           .slider
             - (1..3).to_a.each do |i|
               .slide{ data: { slide: i } }
@@ -46,7 +46,7 @@
     .row.align-justify
       .columns.large-6
         .panel
-          %h3 Productos
+          %h3= link_to 'Productos', products_url
           %p
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Cras ultrices turpis nec mauris molestie, sed dignissim sapien
