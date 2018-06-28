@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :projects,   only: %i[index]
   resources :categories, only: %i[show]
   resources :pages,      only: %i[show]
+  resources :contacts,   only: %i[new create]
 
   namespace :latte do
     root to: 'activity_logs#index'
@@ -72,6 +73,7 @@ Rails.application.routes.draw do
       categories
       products
       projects
+      contacts
     ].each do |resource|
       resources resource do
         put :updates,  on: :collection

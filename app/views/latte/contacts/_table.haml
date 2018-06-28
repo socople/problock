@@ -1,0 +1,23 @@
+%script{ type: 'text/ng-template', id: '/clear-filters.html' }
+  .clear-filters
+    = link_to nil, 'ng-click' => 'clearFilters($event)' do
+      %i.material-icons clear
+      Remover filtros
+
+.table-container
+  %table{ ng: { table: 'table.tableParams', table_columns_binding: 'table.cols' }}
+
+    %tr{ ng: { repeat: 'item in $data' }}
+      %td
+        %input{ type: :checkbox, class: 'decorated-checkbox box', 'checklist-model' => 'checkboxes.ids', 'checklist-value' => 'item.id' }
+
+      %td{ data: { title: "'Nombre'" }, 'ng-if' => 'true', filter: "{ name_icont: 'text' }", sortable: "'name'" } {{ item.name }}
+      %td{ data: { title: "'Teléfono'" }, 'ng-if' => 'true', filter: "{ phone_icont: 'text' }", sortable: "'phone'" } {{ item.phone }}
+      %td{ data: { title: "'Correo electrónico'" }, 'ng-if' => 'true', filter: "{ email_icont: 'text' }", sortable: "'email'" } {{ item.email }}
+      %td{ data: { title: "'Fecha y hora'" }, 'ng-if' => 'true', sortable: "'created_at'" } {{ item.created_at }}
+
+      %td{ data: { title: '', filter: "{ actions: '/clear-filters.html' }" }}
+        .action-buttons
+          = link_to "#{model.to_s.pluralize.underscore}/{{ item.id }}", class: 'text-primary' do
+            %i.material-icons visibility
+            Detalles

@@ -7,9 +7,10 @@
         %p Para todo tipo de proyectos, desde remodelaciones hasta complejos habitacionales
 
         .row.align-justify
-          .columns.large-11
-            = link_to category_url(main_category), class: 'btn' do
-              Ver materiales
+          - unless main_category.nil?
+            .columns.large-11
+              = link_to category_url(main_category), class: 'btn' do
+                Ver materiales
 
           .columns.large-11
             = link_to nil, class: 'btn flat' do
@@ -38,28 +39,29 @@
               = link_to nil, class: 'slick-next' do
                 = image_tag 'slick-next.png'
 
-.home-3
-  .container
-    .row.align-justify
-      .columns.large-6
-        .panel
-          %h3= link_to 'Productos', category_url(main_category)
-          %p
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Cras ultrices turpis nec mauris molestie, sed dignissim sapien
-            bibendum. Etiam urna erat, facilisis congue molestie non,
-            placerat porta erat.
-          = link_to category_url(main_category), class: 'btn' do
-            Ver más materiales
-
-      - @featured_categories.each do |category|
-
+- unless main_category.nil?
+  .home-3
+    .container
+      .row.align-justify
         .columns.large-6
-          = link_to category_url(category), class: 'product' do
-            %figure
-              = image_tag category.main_image.image.url(:small)
-              %figcaption
-                = category.name
+          .panel
+            %h3= link_to 'Productos', category_url(main_category)
+            %p
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Cras ultrices turpis nec mauris molestie, sed dignissim sapien
+              bibendum. Etiam urna erat, facilisis congue molestie non,
+              placerat porta erat.
+            = link_to category_url(main_category), class: 'btn' do
+              Ver más materiales
+
+        - @featured_categories.each do |category|
+
+          .columns.large-6
+            = link_to category_url(category), class: 'product' do
+              %figure
+                = image_tag category.main_image.image.url(:small)
+                %figcaption
+                  = category.name
 
 .home-4
   .container

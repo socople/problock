@@ -1,0 +1,43 @@
+.contacts
+  .container
+    .breadcrumb
+      = render_breadcrumbs separator: ' / '
+
+    %h1 Contáctenos
+
+    .row
+      .columns.small-24.medium-11.large-7
+        = link_to 'tel:2641-5090', class: 'clink tel' do
+          TEL:
+          %br
+          (503) 2641-5090
+      .columns.small-24.medium-11.large-8.medium-offset-2.large-offset-1
+        = link_to 'mailto:info@problock.com', class: 'clink mailto' do
+          Correo electrónico:
+          %br
+          %span
+            info@problock.com
+
+    .row
+      .columns.small-24.medium-22.large-16
+        %strong
+          Escríbanos un mensaje
+
+        = form_for @contact do |f|
+          %p * Los campos son requeridos
+
+          .control
+            = f.text_field :name, placeholder: 'Nombre *'
+
+          .control
+            = f.text_field :phone, placeholder: 'Teléfono'
+
+          .control
+            = f.email_field :email, placeholder: 'E-mail *'
+
+          .control
+            = f.text_area :message, rows: 4, placeholder: 'Mensaje *'
+
+          .control
+            = f.button type: :submit, name: nil, class: 'btn' do
+              Enviar mensaje

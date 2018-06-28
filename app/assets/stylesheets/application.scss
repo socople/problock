@@ -577,3 +577,67 @@ header {
     z-index: 4;
   }
 }
+
+.contacts {
+  background: $white;
+  padding: 0 0 4em;
+
+  h1 {
+    background: image-url('bg-h1.png') left bottom no-repeat;
+    font-size: 3.4em;
+    margin: 0 0 1em;
+    padding: 0 0 .3em;
+  }
+
+  .clink {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-family: 'Squada One', cursive;
+    font-size: 2.2em;
+    line-height: 1;
+
+    span {
+      color: $yellow;
+    }
+
+    &.tel {
+      background-image: image-url('icon-phone-color.png');
+      padding: 0 0 0 1.2em;
+    }
+
+    &.mailto {
+      background-image: image-url('icon-mail-color.png');
+      padding: 0 0 0 2.2em;
+    }
+  }
+
+  strong {
+    display: block;
+    font-size: 1.6em;
+    margin: 2em 0 1em;
+  }
+}
+
+.control {
+  margin: .6em 0;
+}
+
+[type=text],
+[type=email],
+textarea {
+  border: 1px darken($white, 10%) solid;
+  border-radius: 0;
+  border-top: 3px darken($white, 10%) solid;
+  height: 2.5em;
+  text-indent: .6em;
+  width: 100%;
+
+  &:focus {
+    border-color: $yellow;
+    outline: none;
+  }
+}
+
+textarea {
+  height: auto;
+}

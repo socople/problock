@@ -6,15 +6,16 @@
           %h2 San Miguel, El Salvador.
         %li
           = link_to 'Quiénes somos', nil
-        %li
-          = link_to 'Productos', category_url(main_category)
+        - unless main_category.nil?
+          %li
+            = link_to 'Productos', category_url(main_category)
         %li
           = link_to 'Proyectos', projects_url
         %li
           .group
             %span Llámenos
             = link_to '2641-5090', 'tel:2641-5090'
-            = link_to image_tag('icon-mail.png'), nil
+            = link_to image_tag('icon-mail.png'), new_contact_url
 
 - else
   %header.i
@@ -27,8 +28,9 @@
           = link_to 'Inicio', root_url
         %li
           = link_to 'Quiénes somos', nil
-        %li
-          = link_to 'Productos', category_url(main_category)
+        - unless main_category.nil?
+          %li
+            = link_to 'Productos', category_url(main_category)
         %li
           = link_to 'Proyectos', projects_url
         %li
