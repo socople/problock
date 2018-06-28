@@ -377,7 +377,10 @@ header {
   padding: 0 0 4em;
 
   .cover {
-    background: image-url('cover-products.png') center center no-repeat;
+    background-image: image-url('cover-products.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
     padding: 4em 0 0;
 
     @media screen and (max-width: 639px) {

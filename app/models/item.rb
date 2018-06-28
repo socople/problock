@@ -11,9 +11,9 @@ class Item < ApplicationRecord
 
   ##
   # Define this method to this model appears in Latte menu
-  def self.menu?
-    true
-  end
+  # def self.menu?
+  #   true
+  # end
 
   ##
   # Don't forget this method, Latte uses it for many things

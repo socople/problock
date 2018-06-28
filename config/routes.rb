@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   end
 
   root to: 'home#index'
-  resources :products, only: %i[index]
-  resources :projects, only: %i[index]
-  resources :pages, only: %i[show]
+  resources :projects,   only: %i[index]
+  resources :categories, only: %i[show]
+  resources :pages,      only: %i[show]
 
   namespace :latte do
     root to: 'activity_logs#index'
@@ -69,6 +69,7 @@ Rails.application.routes.draw do
       admins
       pages
       items
+      categories
     ].each do |resource|
       resources resource do
         put :updates,  on: :collection

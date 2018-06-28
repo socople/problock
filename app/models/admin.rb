@@ -38,9 +38,9 @@ class Admin < ApplicationRecord
     true
   end
 
-  def self.grid?
-    true
-  end
+  # def self.grid?
+  #   true
+  # end
 
   def self.acts_as_label
     :name

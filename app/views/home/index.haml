@@ -8,7 +8,7 @@
 
         .row.align-justify
           .columns.large-11
-            = link_to products_url, class: 'btn' do
+            = link_to category_url(main_category), class: 'btn' do
               Ver materiales
 
           .columns.large-11
@@ -46,35 +46,23 @@
     .row.align-justify
       .columns.large-6
         .panel
-          %h3= link_to 'Productos', products_url
+          %h3= link_to 'Productos', category_url(main_category)
           %p
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Cras ultrices turpis nec mauris molestie, sed dignissim sapien
             bibendum. Etiam urna erat, facilisis congue molestie non,
             placerat porta erat.
-          = link_to products_url, class: 'btn' do
+          = link_to category_url(main_category), class: 'btn' do
             Ver más materiales
 
-      .columns.large-6
-        = link_to nil, class: 'product' do
-          %figure
-            = image_tag 'icon-blocks.png'
-            %figcaption
-              Bloques
+      - @featured_categories.each do |category|
 
-      .columns.large-6
-        = link_to nil, class: 'product' do
-          %figure
-            = image_tag 'icon-tubos.png'
-            %figcaption
-              Tubos
-
-      .columns.large-6
-        = link_to nil, class: 'product' do
-          %figure
-            = image_tag 'icon-aridos.png'
-            %figcaption
-              Áridos
+        .columns.large-6
+          = link_to category_url(category), class: 'product' do
+            %figure
+              = image_tag category.main_image.image.url(:small)
+              %figcaption
+                = category.name
 
 .home-4
   .container

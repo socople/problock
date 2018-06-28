@@ -3,21 +3,17 @@
     .breadcrumb
       = render_breadcrumbs separator: ' / '
 
-    .cover
+    .cover{ style: @category.cover.image.present? ? "background-image: url('#{image_path(@category.cover.image.url)}')" : nil }
       %h1 Productos
       .tabs
-        = link_to 'Bloques', nil, class: 'active'
-        = link_to 'Tubos', nil
-        = link_to 'Áridos', nil
-        = link_to 'Grava', nil
-        = link_to 'Arena', nil
+        - @categories.each do |category|
+          = link_to category.name, category_url(category), class: category == @category || category == @category.try(:category) ? 'active' : nil
 
-    .filters
-      = link_to 'Todos', nil, class: 'active'
-      = link_to 'Bloques', nil
-      = link_to 'Soleras', nil
-      = link_to 'Dados', nil
-
+    - if @main.categories.any?
+      .filters
+        = link_to 'Todos', category_url(@main), class: @main == @category ? 'active' : nil
+        - @main.categories.each do |category|
+          = link_to category.name, category_url(category), class: category == @category ? 'active' : nil
 
     .row.align-spaced
       - 9.times do

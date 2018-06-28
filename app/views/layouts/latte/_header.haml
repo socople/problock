@@ -15,10 +15,10 @@
                 %i.material-icons keyboard_arrow_right
                 = t model.underscore.singularize, scope: 'activerecord.models', count: :many
 
-          %li
-            = link_to latte_recycler_docks_url do
-              %i.material-icons delete
-              = t 'activerecord.models.recycler_dock', count: :many
+          -# %li
+          -#   = link_to latte_recycler_docks_url do
+          -#     %i.material-icons delete
+          -#     = t 'activerecord.models.recycler_dock', count: :many
 
           %li
             = link_to edit_latte_settings_url do

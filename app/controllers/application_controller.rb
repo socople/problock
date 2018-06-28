@@ -9,4 +9,10 @@ class ApplicationController < ActionController::Base
     return latte_root_url if resource_or_scope == :admin
     super
   end
+
+  helper_method :main_category
+  #
+  def main_category
+    @main_category ||= Category.main.priority.first
+  end
 end

@@ -1,0 +1,37 @@
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :featured
+    .columns.small-24.medium-18= f.check_box :featured, class: 'decorated-checkbox box'
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :category_id
+    .columns.small-24.medium-18= f.select :category_id, @categories.map { |o| [o.name, o.id] }, include_blank: '-- Seleccione --'
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :priority
+    .columns.small-24.medium-18= f.text_field :priority
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :name
+    .columns.small-24.medium-18= f.text_field :name
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :slug
+    .columns.small-24.medium-18= f.text_field :slug, disabled: (f.object.new_record? ? true : nil)
+
+- if f.object.class.respond_to?(:main_image?)
+  = f.fields_for :main_image do |ff|
+    = render partial: 'latte/main_images/form', locals: { f: ff }
+
+- if f.object.class.respond_to?(:cover?)
+  = f.fields_for :cover do |ff|
+    = render partial: 'latte/covers/form', locals: { f: ff }
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :description
+    .columns.small-24.medium-18= f.text_area :description, rows: 4

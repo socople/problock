@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: one
+  featured: false
+  priority: 1
+  name: MyString
+  description: MyText
+  slug: MyString
+
+two:
+  category: two
+  featured: false
+  priority: 1
+  name: MyString
+  description: MyText
+  slug: MyString
