@@ -16,18 +16,14 @@
           = link_to category.name, category_url(category), class: category == @category ? 'active' : nil
 
     .row.align-spaced
-      - 9.times do
+      - @category.products.each do |product|
         .columns.small-22.medium-9.large-7
           .product
-            = image_tag 'samples/4.png'
+            - if product.main_image.image.present?
+              = image_tag product.main_image.image.url(:small)
             %h2
-              Bloques de 10
-            %p
-              \- Bloques de concreto de 10cm.
-              %br
-              \- Pego Blanco.
-              %br
-              \- Pego Gris.
+              = product.name
+            = simple_format product.description
 
 .prefooter
   .container

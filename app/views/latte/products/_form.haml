@@ -1,0 +1,23 @@
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :category_id
+    .columns.small-24.medium-18= f.grouped_collection_select :category_id, @categories, :categories, :name, :id, :name, include_blank: '-- Seleccione --'
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :priority
+    .columns.small-24.medium-18= f.text_field :priority
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :name
+    .columns.small-24.medium-18= f.text_field :name
+
+- if f.object.class.respond_to?(:main_image?)
+  = f.fields_for :main_image do |ff|
+    = render partial: 'latte/main_images/form', locals: { f: ff }
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :description
+    .columns.small-24.medium-18= f.text_area :description, rows: 4

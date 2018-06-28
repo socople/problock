@@ -70,6 +70,7 @@ Rails.application.routes.draw do
       pages
       items
       categories
+      products
     ].each do |resource|
       resources resource do
         put :updates,  on: :collection
