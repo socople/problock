@@ -554,6 +554,7 @@ header {
 .overlay {
   background: transparentize($black, .1);
   bottom: 0;
+  display: none;
   left: 0;
   position: fixed;
   right: 0;

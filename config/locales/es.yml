@@ -22,6 +22,9 @@ es:
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
 
     models:
+      project:
+        one: Proyecto
+        other: Proyectos
       product:
         one: Product
         other: Productos
@@ -63,6 +66,11 @@ es:
         other: Imágenes de portada
 
     attributes:
+      project:
+        priority: Prioridad
+        name: Nombre
+        description: Descripción
+        featured: ¿Destacado?
       product:
         category_id: Categoría
         priority: Prioridad

@@ -9,19 +9,20 @@
       lorem sed enim placerat pellentesque. Aliquam gravida nunc justo, sit
       amet iaculis nunc blandit vitae.
 
-    .row.align-spaced
-      - 4.times do
-        .columns.large-11
-          .project
-            %figure
-              = link_to nil do
-                = image_tag 'samples/1.png'
-            %h2
-              = link_to 'San Gabriel', nil
-            %p
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Nulla sit amet lorem sed enim placerat pellentesque.
-            = link_to nil, class: 'more' do
-              Leer más
+    - @projects.each_slice(2) do |slice|
+      .row.align-spaced
+        - slice.each do |project|
+          .columns.large-11
+            .project
+              - if project.main_image.image.present?
+                %figure
+                  = link_to nil, data: { open: "product-detail-#{project.id}" } do
+                    = image_tag project.main_image.image.url(:large)
+              %h2
+                = link_to project.name, nil, data: { open: "product-detail-#{project.id}" }
 
-= render partial: 'detail'
+              = simple_format project.description
+
+              = link_to nil, class: 'more', data: { open: "product-detail-#{project.id}" } do
+                Leer más
+            = render partial: 'detail', locals: { project: project }

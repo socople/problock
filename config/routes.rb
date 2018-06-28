@@ -71,6 +71,7 @@ Rails.application.routes.draw do
       items
       categories
       products
+      projects
     ].each do |resource|
       resources resource do
         put :updates,  on: :collection

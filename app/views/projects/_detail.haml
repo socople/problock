@@ -1,28 +1,25 @@
-.overlay{ data: { popup: "product-detail-x" }}
+.overlay{ data: { popup: "product-detail-#{project.id}" }}
   .popup
-    = link_to image_tag('icon-close.png'), nil, class: 'close'
+    = link_to image_tag('icon-close.png'), nil, class: 'close', data: { close: "product-detail-#{project.id}" }
 
     .product-detail
       .container
-        - id = 0
-        - (1..3).to_a.reverse.each do |i|
-          - id += 1
-          .background{ style: "background-image: url('#{image_path("samples/#{i}.png")}')", data: { background: i } }
+        - project.images.reverse.each do |image|
+          .background{ style: "background-image: url('#{image_path(image.image.url(:large))}')", data: { background: "#{project.id}#{image.id}" } }
         .row
           .columns.large-10
             .panels
-              %h3 San Gabriel
+              %h3
+                = project.name
               .slider
-                - (1..3).to_a.each do |i|
-                  .slide{ data: { slide: i } }
-                    %p
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Cras ultrices turpis nec mauris molestie, sed dignissim sapien
-                      bibendum. Etiam urna erat, facilisis congue molestie non,
-                      placerat porta erat.
-              .controls
-                = link_to nil, class: 'slick-prev' do
-                  = image_tag 'slick-prev.png'
+                - project.images.each do |image|
+                  .slide{ data: { slide: "#{project.id}#{image.id}" } }
+                    = simple_format image.description
 
-                = link_to nil, class: 'slick-next' do
-                  = image_tag 'slick-next.png'
+              - if project.images.count > 1
+                .controls
+                  = link_to '#', class: 'slick-prev' do
+                    = image_tag 'slick-prev.png'
+
+                  = link_to '#', class: 'slick-next' do
+                    = image_tag 'slick-next.png'

@@ -11,27 +11,37 @@
 
 $ ->
 
-  slider = $('.slider').slick
-    arrows: false
+  $('.slider').each (_, s) ->
 
-  $('.slick-prev').on 'click', (e) ->
-    e.preventDefault()
-    slider.slick('slickPrev')
+    $(s).slick
+      arrows: false
 
-  $('.slick-next').on 'click', (e) ->
-    e.preventDefault()
-    slider.slick('slickNext')
+    $(s).closest('.panels').find('.slick-prev').on 'click', (e) ->
+      e.preventDefault()
+      $(s).slick('slickPrev')
 
-  slider.on 'beforeChange', (slick, currentSlide, prevSlide, nextSlide) ->
-    $('.background').fadeOut()
-    bg = $("[data-slick-index=#{nextSlide}]").find('.slide').data('slide')
-    $("[data-background=#{bg}]").fadeIn()
+    $(s).closest('.panels').find('.slick-next').on 'click', (e) ->
+      e.preventDefault()
+      $(s).slick('slickNext')
+
+    $(s).on 'beforeChange', (slick, currentSlide, prevSlide, nextSlide) ->
+      $(s).closest('.container').find('.background').fadeOut()
+      bg = $(s)
+            .closest('.container')
+            .find("[data-slick-index=#{nextSlide}]")
+            .find('.slide')
+            .data('slide')
+      $("[data-background=#{bg}]").fadeIn()
 
 
   $('[data-open]').on 'click', (e) ->
     e.preventDefault()
-    $('[data-popup=' + $(this).data('open') + ']').fadeIn()
+    $('body').addClass('noscroll')
+    o = $('[data-popup=' + $(this).data('open') + ']')
+    o.fadeIn()
+    o.find('.slider').slick('setPosition')
 
   $('[data-close]').on 'click', (e) ->
     e.preventDefault()
+    $('body').removeClass('noscroll')
     $('[data-popup=' + $(this).data('close') + ']').fadeOut()
