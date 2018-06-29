@@ -9,6 +9,7 @@ $bold: 700;
 $black: #343434;
 $gray: #f2f2f2;
 $purple: #4577be;
+$red: #a94442;
 $yellow: #ff8a00;
 $white: #fff;
 
@@ -187,6 +188,16 @@ header {
 
   li {
     padding: 1em 0;
+  }
+
+  &.i {
+    .group::before {
+      border-top: 8px solid $gray;
+    }
+
+    .group::after {
+      border-bottom: 8px solid $gray;
+    }
   }
 
   a,
@@ -458,6 +469,16 @@ header {
   .product {
     margin: 3em 0 0;
 
+    figure {
+      @media screen and (max-width: 639px) {
+        text-align: center;
+      }
+    }
+
+    img {
+      width: 12em;
+    }
+
     h2 {
       font-family: 'Squada One', cursive;
       font-size: 2em;
@@ -618,7 +639,17 @@ header {
 }
 
 .control {
-  margin: .6em 0;
+  margin: .8em 0;
+
+  .help-block {
+    color: $red;
+    display: block;
+    font-size: .8em;
+    font-weight: $bold;
+    margin: .2em 0 0;
+    text-align: right;
+    text-transform: uppercase;
+  }
 }
 
 [type=text],
@@ -639,4 +670,24 @@ textarea {
 
 textarea {
   height: auto;
+  text-indent: 0;
+  padding: .2em .5em;
+}
+
+form {
+  .btn {
+    margin: 1em 0 0;
+  }
+}
+
+.notice {
+  background: $purple;
+  color: $white;
+  font-size: .8em;
+  font-weight: $bold;
+  line-height: 1.4;
+  margin: 1em 0 1.5em;
+  padding: .8em 1em;
+  text-align: center;
+  text-transform: uppercase;
 }

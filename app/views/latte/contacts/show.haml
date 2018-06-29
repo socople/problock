@@ -1,0 +1,29 @@
+%section
+  .header
+    .row.align-middle
+      .columns
+        %h1
+          %i.material-icons list
+          = t model.to_s.underscore, scope: 'activerecord.models', count: :many
+
+  .breacrumb
+    = render_breadcrumbs separator: ' / '
+
+  .container.medium
+    %table.ng-table.info
+      .diff-container
+        %em= t 'activerecord.attributes.contact.name'
+        .diff
+          %ins= @contact.name
+
+        %em= t 'activerecord.attributes.contact.phone'
+        .diff
+          %ins= @contact.phone
+
+        %em= t 'activerecord.attributes.contact.email'
+        .diff
+          %ins= @contact.email
+
+        %em= t 'activerecord.attributes.contact.message'
+        .diff
+          %ins= @contact.message

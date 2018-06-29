@@ -9,7 +9,7 @@
         - @categories.each do |category|
           = link_to category.name, category_url(category), class: category == @category || category == @category.try(:category) ? 'active' : nil
 
-    - if @main.categories.any?
+    - if @main.categories.count > 1
       .filters
         = link_to 'Todos', category_url(@main), class: @main == @category ? 'active' : nil
         - @main.categories.each do |category|
@@ -20,7 +20,8 @@
         .columns.small-22.medium-9.large-7
           .product
             - if product.main_image.image.present?
-              = image_tag product.main_image.image.url(:small)
+              %figure
+                = image_tag product.main_image.image.url(:small)
             %h2
               = product.name
             = simple_format product.description
@@ -30,5 +31,5 @@
     .row.align-center
       .columns.small-24.medium-10.large-6
         %strong ¿Cotización?
-        = link_to 'Escríbanos', nil, class: 'btn'
+        = link_to 'Escríbanos', new_contact_url, class: 'btn'
         = link_to 'Llámenos 2641-5090', 'tel:2641-5090', class: 'tel'

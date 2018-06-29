@@ -23,6 +23,13 @@
         %strong
           Escríbanos un mensaje
 
+        - if flash[:notice] == 'sent'
+          .notice
+            ¡Gracias por escribirnos!
+            %br
+            nuestro equipo se pondrá en contacto con
+            usted en unos momentos.
+
         = form_for @contact do |f|
           %p * Los campos son requeridos
 
