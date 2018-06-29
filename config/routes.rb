@@ -11,8 +11,11 @@ Rails.application.routes.draw do
   root to: 'home#index'
   resources :projects,   only: %i[index]
   resources :categories, only: %i[show]
-  resources :pages,      only: %i[show]
   resources :contacts,   only: %i[new create]
+
+  resources :pages, only: [] do
+    get 'quienes-somos', action: 'about', as: :about, on: :collection
+  end
 
   namespace :latte do
     root to: 'activity_logs#index'

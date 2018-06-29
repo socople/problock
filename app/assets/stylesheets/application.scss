@@ -691,3 +691,15 @@ form {
   text-align: center;
   text-transform: uppercase;
 }
+
+.pages {
+  background: $white;
+  padding: 0 0 4em;
+
+  h1 {
+    background: image-url('bg-h1.png') left bottom no-repeat;
+    font-size: 3.4em;
+    margin: 0;
+    padding: 0 0 .3em;
+  }
+}
