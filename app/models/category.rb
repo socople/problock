@@ -76,6 +76,6 @@ class Category < ApplicationRecord
   end
 
   def products
-    Product.where(category_id: family_ids)
+    Product.where(category_id: family_ids).priority
   end
 end
