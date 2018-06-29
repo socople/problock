@@ -535,7 +535,8 @@ header {
   }
 }
 
-.project {
+.project,
+.page-block {
   border-radius: 1em;
   box-shadow: 0 .4em 2em .1em transparentize($black, .8);
   margin: 2em 1em;
@@ -568,6 +569,18 @@ header {
     color: $purple;
     font-size: 1.2em;
     font-weight: $bold;
+  }
+}
+
+.page-block {
+  text-align: center;
+
+  h2 {
+    color: $black;
+    font-size: 2em;
+    font-family: 'Squada One', cursive;
+    margin: 0;
+    text-transform: uppercase;
   }
 }
 
@@ -693,7 +706,7 @@ form {
 }
 
 .pages {
-  background: $white;
+  background: darken($white, 3%);
   padding: 0 0 4em;
 
   h1 {
@@ -701,5 +714,24 @@ form {
     font-size: 3.4em;
     margin: 0;
     padding: 0 0 .3em;
+  }
+}
+
+.about-1 {
+  padding: 3em 0 4em;
+
+  .container {
+    background: image-url('quienes-somos.png') right top no-repeat;
+    background-size: auto 100%;
+    margin: 0 auto;
+    padding: 0 1em 9em;
+  }
+
+  .panels {
+    p {
+      color: darken($white, 60%);
+      font-size: 1.8em;
+      line-height: 1.2;
+    }
   }
 }
