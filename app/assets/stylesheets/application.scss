@@ -82,6 +82,11 @@ h4 {
   position: relative;
   z-index: 2;
 
+  @media screen and (max-width: 639px) {
+    background: $white;
+    padding: 1em 1em 2em;
+  }
+
   .controls {
     text-align: right;
 
@@ -94,6 +99,11 @@ h4 {
 .panel {
   background: image-url('bg-panel.png') 0 0 no-repeat;
   padding: 0 0 1em 2em;
+
+  @media screen and (max-width: 639px) {
+    background: none;
+    padding: 1em 1em 2em;
+  }
 
   h3 {
     margin: 0;
@@ -115,6 +125,14 @@ footer {
   background: darken($white, 67%);
   color: $white;
   padding: 2.5em 0 2em;
+
+  @media screen and (max-width: 639px) {
+    text-align: center;
+
+    .columns {
+      padding: 1em 0;
+    }
+  }
 
   a {
     font-family: 'Squada One', cursive;
@@ -148,6 +166,10 @@ header {
     background: $gray;
     padding: 0 0 1em;
 
+    @media screen and (max-width: 780px) {
+      padding: 1em 0;
+    }
+
     img {
       max-width: 104px;
     }
@@ -158,6 +180,40 @@ header {
 
     li:first-child {
       padding: 0;
+    }
+
+    .group::before {
+      border-top: 8px solid $gray;
+    }
+
+    .group::after {
+      border-bottom: 8px solid $gray;
+    }
+
+    nav {
+      top: 6em;
+    }
+  }
+
+  li:last-child {
+    display: none;
+
+    img {
+      max-width: 32px;
+    }
+  }
+
+  @media screen and (max-width: 780px) {
+    li {
+      display: none;
+    }
+
+    li:first-child {
+      display: block;
+    }
+
+    li:last-child {
+      display: block;
     }
   }
 
@@ -188,16 +244,6 @@ header {
 
   li {
     padding: 1em 0;
-  }
-
-  &.i {
-    .group::before {
-      border-top: 8px solid $gray;
-    }
-
-    .group::after {
-      border-bottom: 8px solid $gray;
-    }
   }
 
   a,
@@ -245,6 +291,24 @@ header {
       vertical-align: top;
     }
   }
+
+  nav {
+    background: $white;
+    bottom: 0;
+    display: none;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 4em;
+    z-index: 5;
+
+    a {
+      display: block;
+      font-size: 2em;
+      margin: 1.5em 0;
+      text-align: center;
+    }
+  }
 }
 
 .home-1 {
@@ -254,6 +318,17 @@ header {
   padding: 2em 0 6em;
   position: relative;
 
+  @media screen and (max-width: 1300px) {
+    background-position: right bottom;
+    background-size: 45% auto;
+  }
+
+  @media screen and (max-width: 639px) {
+    background: none;
+    padding: 2em 0;
+    text-align: center;
+  }
+
   &::after {
     background: $yellow;
     bottom: -11px;
@@ -262,6 +337,11 @@ header {
     left: 0;
     position: absolute;
     width: 330px;
+
+    @media screen and (max-width: 639px) {
+      right: 0;
+      width: 100%;
+    }
   }
 
   img {
@@ -270,11 +350,25 @@ header {
 
   h1 {
     margin: .5em 0 0;
+
+    @media screen and (max-width: 1300px) {
+      font-size: 3.8em;
+    }
+
+    @media screen and (max-width: 639px) {
+      font-size: 2.8em;
+    }
   }
 
   p {
     font-size: 1.3em;
     margin: 1em 0;
+  }
+
+  .btn {
+    @media screen and (max-width: 1300px) {
+      margin: .5em 0;
+    }
   }
 }
 
@@ -282,9 +376,17 @@ header {
 .product-detail {
   padding: 2em 0;
 
+  @media screen and (max-width: 639px) {
+    padding: 0;
+  }
+
   .container {
     padding: 0 1em 12em;
     position: relative;
+
+    @media screen and (max-width: 639px) {
+      padding: 0;
+    }
   }
 
   .background {
@@ -298,6 +400,10 @@ header {
     right: 0;
     top: 0;
     z-index: 1;
+
+    @media screen and (max-width: 639px) {
+      display: none;
+    }
   }
 }
 
@@ -313,6 +419,10 @@ header {
   background: image-url('bg-home-3.png');
   padding: 5em 0;
 
+  @media screen and (max-width: 639px) {
+    padding: 1em 0;
+  }
+
   .product {
     display: block;
   }
@@ -323,6 +433,11 @@ header {
     padding: 5em 0 0;
     position: relative;
     text-align: center;
+
+    @media screen and (max-width: 639px) {
+      margin: 0 1em 3em;
+      padding: 5em 0 0;
+    }
 
     &::before {
       border-right: 28px $yellow solid;
@@ -362,10 +477,25 @@ header {
 .home-4 {
   padding: 3em 0 4em;
 
+  @media screen and (max-width: 639px) {
+    padding: 0;
+  }
+
   .container {
     background: image-url('bg-home-4.png') 1em top no-repeat;
     background-size: auto 100%;
     padding: 0 1em 9em;
+
+    @media screen and (max-width: 1023px) {
+      background-position: left top;
+      margin: 0 1em;
+      padding: 0 0 9em;
+    }
+
+    @media screen and (max-width: 639px) {
+      margin: 0;
+      padding: 0;
+    }
   }
 
   .btn {
@@ -577,8 +707,8 @@ header {
 
   h2 {
     color: $black;
-    font-size: 2em;
     font-family: 'Squada One', cursive;
+    font-size: 2em;
     margin: 0;
     text-transform: uppercase;
   }
@@ -683,8 +813,8 @@ textarea {
 
 textarea {
   height: auto;
-  text-indent: 0;
   padding: .2em .5em;
+  text-indent: 0;
 }
 
 form {
@@ -732,6 +862,17 @@ form {
       color: darken($white, 60%);
       font-size: 1.8em;
       line-height: 1.2;
+    }
+  }
+}
+
+.slide {
+  figure {
+    display: none;
+    margin: 1em 0;
+
+    @media screen and (max-width: 639px) {
+      display: block;
     }
   }
 }

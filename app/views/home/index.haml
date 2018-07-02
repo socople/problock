@@ -1,27 +1,27 @@
 .home-1
   .container
     .row
-      .columns.large-12
+      .columns.small-24.medium-12.large-12
         = image_tag 'problock.png'
         %h1 Materiales de construcción
         %p Para todo tipo de proyectos, desde remodelaciones hasta complejos habitacionales
 
         .row.align-justify
           - unless main_category.nil?
-            .columns.large-11
+            .columns.small-24.medium-24.large-11
               = link_to category_url(main_category), class: 'btn' do
                 Ver materiales
 
-          .columns.large-11
+          .columns.small-24.medium-24.large-11
             = link_to new_contact_url, class: 'btn flat' do
               Solicitar cotización
 
 .home-2
   .container
     - @projects.reverse.each do |project|
-      .background{ style: project.main_image.image.present? ? "background-image: url('#{image_path(project.main_image.image.url(:large))}')" : nil, data: { background: project.id } }
+      .background{ style: project.main_image.image.present? ? "background-image: url('#{image_path(project.main_image.image.url(:medium))}')" : nil, data: { background: project.id } }
     .row
-      .columns.large-10
+      .columns.small-24.medium-12.large-10
         .panels
           %h3= link_to 'Proyectos', projects_url
           .slider
@@ -30,6 +30,10 @@
                 %h4
                   = project.name
                 = simple_format project.description
+
+                - if project.main_image.image.present?
+                  %figure
+                    = image_tag project.main_image.image.url(:medium)
 
           - if @projects.count > 1
             .controls
@@ -43,7 +47,7 @@
   .home-3
     .container
       .row.align-justify
-        .columns.large-6
+        .columns.small-24.medium-24.large-6
           .panel
             %h3= link_to 'Productos', category_url(main_category)
             %p
@@ -56,7 +60,7 @@
 
         - @featured_categories.each do |category|
 
-          .columns.large-6
+          .columns.small-24.medium-8.large-6
             = link_to category_url(category), class: 'product' do
               %figure
                 = image_tag category.main_image.image.url(:small)
@@ -66,14 +70,14 @@
 .home-4
   .container
     .row
-      .columns.large-10.large-offset-14
+      .columns.small-24.medium-12.large-10.medium-offset-12.large-offset-14
         .panels
           %h3 Visítenos
           %p
             Horarios:
             %br
             %strong
-              De lunes a viernes 6:00am a 5:00pm
+              De lunes a viernes de 6:00am a 5:00pm
           %p
             Dirección
             %br

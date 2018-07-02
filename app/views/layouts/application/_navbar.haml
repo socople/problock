@@ -1,0 +1,9 @@
+= link_to nil, data: { nav: true } do
+  = image_tag 'hamburger.png'
+
+%nav
+  = link_to 'Inicio', root_url
+  = link_to 'Quiénes somos', about_pages_url
+  = link_to 'Productos', category_url(main_category) unless main_category.nil?
+  = link_to 'Proyectos', projects_url
+  = link_to 'Contáctenos', new_contact_url

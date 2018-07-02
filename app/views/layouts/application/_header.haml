@@ -16,6 +16,8 @@
             %span Llámenos
             = link_to '2641-5090', 'tel:2641-5090'
             = link_to image_tag('icon-mail.png'), new_contact_url
+        %li
+          = render partial: 'layouts/application/navbar'
 
 - else
   %header.i
@@ -40,3 +42,5 @@
             %span Llámenos
             = link_to '2641-5090', 'tel:2641-5090'
             = link_to image_tag('icon-mail.png'), new_contact_url
+        %li
+          = render partial: 'layouts/application/navbar'

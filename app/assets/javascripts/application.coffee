@@ -45,3 +45,11 @@ $ ->
     e.preventDefault()
     $('body').removeClass('noscroll')
     $('[data-popup=' + $(this).data('close') + ']').fadeOut()
+
+  $('[data-nav]').on 'click', (e) ->
+    e.preventDefault()
+    $('nav').fadeToggle 'fast', ->
+      if $('nav').is(':visible')
+        $('body').addClass('noscroll')
+      else
+        $('body').removeClass('noscroll')
