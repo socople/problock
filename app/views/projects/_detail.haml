@@ -7,7 +7,7 @@
         - project.images.reverse.each do |image|
           .background{ style: "background-image: url('#{image_path(image.image.url(:large))}')", data: { background: "#{project.id}#{image.id}" } }
         .row
-          .columns.large-10
+          .columns.small-24.medium-12.large-10
             .panels
               %h3
                 = project.name
@@ -15,6 +15,10 @@
                 - project.images.each do |image|
                   .slide{ data: { slide: "#{project.id}#{image.id}" } }
                     = simple_format image.description
+
+                    - if project.main_image.image.present?
+                      %figure
+                        = image_tag project.main_image.image.url(:medium)
 
               - if project.images.count > 1
                 .controls

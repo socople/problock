@@ -12,7 +12,7 @@
     - @projects.each_slice(2) do |slice|
       .row.align-spaced
         - slice.each do |project|
-          .columns.large-11
+          .columns.small-24.medium-11.large-11
             .project
               - if project.main_image.image.present?
                 %figure
