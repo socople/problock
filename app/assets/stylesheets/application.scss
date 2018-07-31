@@ -891,14 +891,14 @@ form {
   }
 
   .container {
-    background: image-url('quienes-somos.png') right top no-repeat;
-    background-size: auto 100%;
+    // background: image-url('quienes-somos.png') right top no-repeat;
+    // background-size: auto 100%;
     margin: 0 auto;
-    padding: 0 1em 9em;
+    padding: 0 1em;
 
     @media screen and (max-width: 1023px) {
       margin: 0 1em;
-      padding: 0 0 9em;
+      padding: 0;
     }
 
     @media screen and (max-width: 639px) {
