@@ -40,4 +40,10 @@ class Contact < ApplicationRecord
   ransacker :phone, type: :string do
     Arel.sql("UNACCENT(\"#{table_name}\".\"phone\")")
   end
+
+  after_create :send_mail
+  #
+  def send_mail
+    LatteMailer.contact(self).deliver_now
+  end
 end

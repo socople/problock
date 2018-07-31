@@ -1,0 +1,19 @@
+%p
+  Buen día, aquí está la información recibida en el formulario de contacto de
+  problocksv.com
+
+%dl
+  %dt Nombre
+  %dd= @contact.try(:name) || '- -'
+
+%dl
+  %dt Email
+  %dd= @contact.try(:email) || '- -'
+
+%dl
+  %dt Teléfono
+  %dd= @contact.try(:phone) || '- -'
+
+%dl
+  %dt Mensaje
+  %dd= @contact.try(:message) || '- -'

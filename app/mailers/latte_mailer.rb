@@ -24,4 +24,13 @@ class LatteMailer < ApplicationMailer
          subject: 'Hello from Latte CMS!',
          delivery_method_options: delivery_options
   end
+
+  def contact(contact)
+    @contact = contact
+
+    mail from: "#{@contact.name} <#{@contact.email}>",
+         to: "#{Setting.inbox_name} <#{Setting.inbox_email}>",
+         subject: 'Nuevo contacto desde problocksv.com',
+         delivery_method_options: delivery_options
+  end
 end
