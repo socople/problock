@@ -4,6 +4,7 @@
     = display_meta_tags
     = stylesheet_link_tag :application
     = javascript_include_tag :application
+    = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBnb32biosnk9irpzOcu0PSjspD2U7ZJxY&callback=initMap', async: true, defer: true
     = csrf_meta_tags
 
     = render partial: 'layouts/application/analytics'
@@ -11,4 +12,7 @@
     = render partial: 'layouts/application/header'
     %main
       = yield
+
+    #map.map
+      / map will be load here using google maps api
     = render partial: 'layouts/application/footer'

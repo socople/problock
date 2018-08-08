@@ -53,3 +53,20 @@ $ ->
         $('body').addClass('noscroll')
       else
         $('body').removeClass('noscroll')
+
+@initMap = ->
+  if document.getElementById("map")
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: 13.4785149, lng: -88.2041086 },
+      zoom: 15,
+      scrollwheel: false
+    })
+
+  marker = new google.maps.Marker {
+    position: { lat: 13.4785149, lng: -88.2041086 },
+    map: map
+  }
+
+  infowindow = new google.maps.InfoWindow()
+  infowindow.setContent("ProBlock")
+  infowindow.open(map, marker)

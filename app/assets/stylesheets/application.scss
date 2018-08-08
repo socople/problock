@@ -911,8 +911,9 @@ form {
   .panels {
     p {
       color: darken($white, 60%);
-      font-size: 1.8em;
+      font-size: 1.7em;
       line-height: 1.2;
+      text-align: justify;
 
       @media screen and (max-width: 1023px) {
         font-size: 1.3em;
@@ -929,5 +930,18 @@ form {
     @media screen and (max-width: 639px) {
       display: block;
     }
+  }
+}
+
+.map {
+  border-top: 1px $yellow solid;
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+  padding-bottom: 30%;
+  position: relative;
+
+  @media screen and (max-width: 640px) {
+    padding-bottom: 90%;
   }
 }
