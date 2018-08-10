@@ -57,13 +57,13 @@ $ ->
 @initMap = ->
   if document.getElementById("map")
     map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 13.4785149, lng: -88.2041086 },
+      center: { lat: 13.430697, lng: -88.112297 },
       zoom: 15,
       scrollwheel: false
     })
 
   marker = new google.maps.Marker {
-    position: { lat: 13.4785149, lng: -88.2041086 },
+    position: { lat: 13.430697, lng: -88.112297 },
     map: map
   }
 
