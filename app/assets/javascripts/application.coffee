@@ -2,6 +2,8 @@
 #= require jquery_ujs
 #= require jquery.slick
 # require sharer
+#= require cocoon
+#= require quotation
 
 #-- Uncomment (add "=" after "#") to use photoswipe --
 #
@@ -62,11 +64,11 @@ $ ->
       scrollwheel: false
     })
 
-  marker = new google.maps.Marker {
-    position: { lat: 13.430697, lng: -88.112297 },
-    map: map
-  }
+    marker = new google.maps.Marker {
+      position: { lat: 13.430697, lng: -88.112297 },
+      map: map
+    }
 
-  infowindow = new google.maps.InfoWindow()
-  infowindow.setContent("ProBlock")
-  infowindow.open(map, marker)
+    infowindow = new google.maps.InfoWindow()
+    infowindow.setContent("ProBlock")
+    infowindow.open(map, marker)

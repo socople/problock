@@ -20,7 +20,19 @@ class Product < ApplicationRecord
   # Validations
   validates :name, presence: true
   validates :category_id, presence: true
-  validates :priority, numericality: { only_integer: true }
+  validates :priority,
+            numericality: {
+              only_integer: true
+            }
+  validates :units_by_truck,
+            numericality: {
+              only_integer: true,
+              greater_than: 0
+            }
+  validates :price,
+            numericality: {
+              greater_than: 0.0
+            }
 
   ##
   # Define this method to this model appears in Latte menu

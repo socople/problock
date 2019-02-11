@@ -17,6 +17,14 @@ $white: #fff;
   max-width: none;
 }
 
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1046px;
@@ -833,6 +841,7 @@ header {
 
 [type=text],
 [type=email],
+select,
 textarea {
   border: 1px darken($white, 10%) solid;
   border-radius: 0;
@@ -851,6 +860,22 @@ textarea {
   height: auto;
   padding: .2em .5em;
   text-indent: 0;
+}
+
+select {
+  background: $white;
+}
+
+.date-select-container {
+  display: flex;
+  margin: 0 -1em;
+
+  select {
+    display: inline-block;
+    flex: 1;
+    margin: 0 1em;
+    width: auto;
+  }
 }
 
 form {
@@ -939,7 +964,77 @@ form {
   padding-bottom: 30%;
   position: relative;
 
+  &.large {
+    margin: .5em 0 0;
+    padding-bottom: 60%;
+  }
+
   @media screen and (max-width: 640px) {
     padding-bottom: 90%;
+  }
+}
+
+.quotations {
+  background: $white;
+  padding: 0 0 4em;
+
+  h1 {
+    background: image-url('bg-h1.png') left bottom no-repeat;
+    font-size: 3.4em;
+    margin: 0;
+    padding: 0 0 .3em;
+  }
+
+  h3 {
+    font-size: 1.4em;
+    margin: 3em 0 0;
+  }
+
+  strong {
+    display: block;
+    font-family: 'Squada One', cursive;
+    font-size: 1.1em;
+    font-weight: normal;
+    margin: 1.5em 0 0;
+    text-transform: uppercase;
+  }
+
+  .remove {
+    color: $red;
+    font-weight: $bold;
+    text-transform: uppercase;
+  }
+
+  .radios {
+    margin: 1.3em 0;
+  }
+
+  .radio {
+    cursor: pointer;
+    display: block;
+    font-size: .8em;
+    font-style: italic;
+    margin: 1em 0;
+    text-transform: uppercase;
+  }
+
+  .date-select-container {
+    margin: 1em -1em 0;
+  }
+
+  .add-product {
+    background: $purple;
+    border-radius: 999px;
+    color: $white;
+    font-weight: $bold;
+    height: 2.5em;
+    line-height: 2.5;
+    margin: 1em 0 0;
+    padding: 0 1em;
+    text-transform: uppercase;
+  }
+
+  .quotation-map-container {
+    display: none;
   }
 }

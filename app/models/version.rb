@@ -6,7 +6,7 @@ class Version < PaperTrail::Version
 
   def yobject
     return {} if object.nil?
-    HashWithIndifferentAccess.new(YAML.safe_load(object, [Time]))
+    HashWithIndifferentAccess.new(YAML.safe_load(object, [Time, BigDecimal]))
   end
 
   def object_model

@@ -85,6 +85,8 @@ es:
         priority: Prioridad
         name: Nombre
         description: Descripción
+        price: Precio unitario
+        units_by_truck: Unidades máximas por camión
       category:
         featured: ¿Destacada?
         category_id: Categoría padre

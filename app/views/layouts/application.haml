@@ -4,7 +4,10 @@
     = display_meta_tags
     = stylesheet_link_tag :application
     = javascript_include_tag :application
-    = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBlfz1tQxWykQmPY9_m3Gz38cmdmXfZx1Y&callback=initMap', defer: true
+    - if show_map?
+      = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBnb32biosnk9irpzOcu0PSjspD2U7ZJxY&callback=initMap', defer: true
+    - if quotation_map?
+      = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBnb32biosnk9irpzOcu0PSjspD2U7ZJxY&callback=initQuotationMap', defer: true
     = csrf_meta_tags
 
     = render partial: 'layouts/application/analytics'
@@ -13,6 +16,7 @@
     %main
       = yield
 
-    #map.map
-      / map will be load here using google maps api
+    - if show_map?
+      #map.map
+        / map will be load here using google maps api
     = render partial: 'layouts/application/footer'

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :projects,   only: %i[index]
   resources :categories, only: %i[show]
   resources :contacts,   only: %i[new create]
+  resources :quotations, only: %i[new create show]
 
   resources :pages, only: [] do
     get 'quienes-somos', action: 'about', as: :about, on: :collection

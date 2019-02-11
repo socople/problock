@@ -15,4 +15,16 @@ class ApplicationController < ActionController::Base
   def main_category
     @main_category ||= Category.main.priority.first
   end
+
+  helper_method :show_map?
+  #
+  def show_map?
+    true
+  end
+
+  helper_method :quotation_map?
+  #
+  def quotation_map?
+    false
+  end
 end

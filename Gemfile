@@ -44,7 +44,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'listen', '~> 3.0.5'
-  gem 'rubocop', '~> 0.51.0'
+  gem 'rubocop', '~> 0.63.1'
   gem 'scss_lint', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

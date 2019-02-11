@@ -1,0 +1,11 @@
+.nested-fields
+  .row.align-justify.align-middle
+    .columns.small-12.medium-17.larage-17
+      .control
+        = f.grouped_collection_select :name, @categories, :ordered_products, :name, :id, :name, include_blank: '-- Seleccione --'
+    .columns.small-4.medium-3.large-3
+      .control
+        = f.text_field :quantity
+    .columns.small-6.medium-2.large-2
+      .control.text-right
+        = link_to_remove_association "Quitar", f, class: 'remove'

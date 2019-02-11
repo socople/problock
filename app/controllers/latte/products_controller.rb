@@ -12,11 +12,11 @@ module Latte
     end
 
     def permits
-      %i[category_id priority name description]
+      %i[category_id priority price units_by_truck name description]
     end
 
     def exportable_fields
-      %i[category_id priority name description]
+      %i[category_id priority price units_by_truck name description]
     end
 
     def init_form

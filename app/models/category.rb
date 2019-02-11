@@ -1,8 +1,10 @@
 #
 class Category < ApplicationRecord
   belongs_to :category
-
   has_many :categories
+  has_many :ordered_products,
+           -> { order(:name) },
+           class_name: 'Product'
 
   ##
   # Include this concern to enable csv exportation on Latte for this model
@@ -65,6 +67,11 @@ class Category < ApplicationRecord
   scope :main,     -> { where(category_id: nil) }
   scope :featured, -> { where(featured: true) }
   scope :priority, -> { order(:priority) }
+
+  scope :with_products, lambda {
+    includes(:ordered_products)
+      .where.not(products: { id: nil })
+  }
 
   def family
     o = [self]
