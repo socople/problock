@@ -14,7 +14,8 @@ defaultend = null
     map = new google.maps.Map(document.getElementById(divid), {
       center: startpoint,
       zoom: 15,
-      scrollwheel: false
+      scrollwheel: false,
+      mapTypeId: 'hybrid'
     })
 
     geocoder = new google.maps.Geocoder()
@@ -34,8 +35,6 @@ defaultend = null
   address = document.getElementById('quotation_address').value
   return if address == ''
 
-  document.getElementById('quotation-map-container').style.display = 'block'
-
   geocoder.geocode { 'address': address }, (results, status) ->
     if status == 'OK'
       displayRoute(startpoint, results[0].geometry.location, directionsService, directionsDisplay)
@@ -47,7 +46,7 @@ defaultend = null
     origin: startpoint,
     destination: destination,
     travelMode: 'DRIVING',
-    avoidTolls: true
+    region: 'https://maps.google.com.sv/'
   }
   ,
   (response, status) ->
