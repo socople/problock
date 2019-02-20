@@ -1,0 +1,26 @@
+.quotations
+  .container
+    .breadcrumb
+      = render_breadcrumbs separator: ' / '
+
+    %h1 Cotizador
+
+    %h3
+      Serán necesarios #{@quotation.trucks.length} camiones para la entrega de su pedido
+    %p
+      Por favor, arrastre los productos para ordenarlos dentro de los camiones
+      y establesca la fecha de entrega de cada uno.
+
+
+    .row.align-spaced
+      - @quotation.trucks.each_with_index do |truck, i|
+        .columns.small-7
+          Camión
+          %b= (1 + i)
+          .truck.droppable
+
+            - truck.truck_quotation_products.each do |o|
+              .truck-item.draggable
+                #{o.quotation_product.product.name}: #{o.quantity}
+                -# %br
+                -# %b= o.percent_in_truck

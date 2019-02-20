@@ -25,6 +25,7 @@ class Product < ApplicationRecord
               only_integer: true
             }
   validates :units_by_truck,
+            presence: true,
             numericality: {
               only_integer: true,
               greater_than: 0

@@ -32,7 +32,7 @@
 
   #quotation-items
     = f.fields_for :quotation_products do |f|
-      = render 'quotation_products', f: f
+      = render 'quotation_product_fields', f: f
     .links.text-right
       = link_to_add_association '+ Agregar más productos', f, :quotation_products, class: 'add-product'
 
@@ -41,10 +41,10 @@
     Información para el envío
 
   .row
-    .columns.small-24.medium-11.large-11
+    .columns.small-24
       .control
         %strong Dirección
-        = f.text_area :address, rows: 5
+        = f.text_field :address
 
   .control
     %strong
@@ -52,7 +52,7 @@
     #quotation-map.map.large
     = f.hidden_field :distance
 
-  -# .row.align-center
-  -#   .columns.small-20.medium-6.large-4
-  -#     = f.button type: :submit, name: nil, class: 'btn' do
-  -#       Cotizar
+  .row.align-center
+    .columns.small-20.medium-6.large-4
+      = f.button type: :submit, name: nil, class: 'btn' do
+        Cotizar

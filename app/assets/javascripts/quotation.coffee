@@ -65,11 +65,14 @@ defaultend = null
   document.getElementById('quotation_distance').value = total
 
 $ ->
-  $('.add-product').trigger 'click'
-
-  $('.date-select-container').hide()
-  $('[type=radio]').on 'change', ->
-    if $(this).val() == '0'
-      $('.date-select-container').fadeIn()
+  hideOrShowAddLink = ->
+    if $('#quotation-items .nested-fields:visible').length <= 1
+      $('#quotation-items .remove').hide()
     else
-      $('.date-select-container').fadeOut()
+      $('#quotation-items .remove').show()
+
+  $('#quotation-items').on 'cocoon:after-insert', hideOrShowAddLink
+  $('#quotation-items').on 'cocoon:after-remove', hideOrShowAddLink
+
+  if $('#quotation-items .nested-fields:visible').length == 0
+    $('.add-product').trigger 'click'

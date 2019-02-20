@@ -3,6 +3,7 @@
 #= require jquery.slick
 # require sharer
 #= require cocoon
+#= require hqy.interact
 #= require quotation
 
 #-- Uncomment (add "=" after "#") to use photoswipe --
@@ -12,6 +13,27 @@
 # require photoswipe-init
 
 $ ->
+
+  $ph = aixsY = null
+  $('.draggable').hqyDraggable
+  	proxy: 'clone'
+  	onStartDrag: (event, target) ->
+  		$(target).width($(this).width())
+
+  		$ph = $(this).clone()
+  		$ph.addClass('op2')
+  		$(this).hide().before($ph)
+
+  	onStopDrag: ->
+  		$ph.after(this)
+  		$ph.remove()
+  		$ph = null
+  		$(this).show()
+
+  $('.droppable').hqyDroppable
+  	onDragEnter: (event, target) ->
+  		$(this).append($ph)
+
 
   $('.slider').each (_, s) ->
 
