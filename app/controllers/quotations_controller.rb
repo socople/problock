@@ -20,11 +20,15 @@ class QuotationsController < ApplicationController
     @quotation = Quotation.find params[:id]
   end
 
+  def show
+    @quotation = Quotation.find params[:id]
+  end
+
   def update
     @quotation = Quotation.find params[:id]
     @quotation.update_attributes(truck_params)
 
-    redirect_to edit_quotation_url(@quotation)
+    redirect_to quotation_url(@quotation)
   end
 
   def init_form

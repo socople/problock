@@ -44,10 +44,23 @@
     .columns.small-24.medium-5= f.label :google_analytics_id
     .columns.small-24.medium-18= f.text_field :google_analytics_id, placeholder: 'UA-000000000-0'
 
+-# .control
+-#   .row.align-middle.align-justify
+-#     .columns.small-24.medium-5= f.label :contact_page_id
+-#     .columns.small-24.medium-18= f.select :contact_page_id, @pages.map { |p| [p.name, p.id] }, { include_blank: true }
+
+%h4
+  Configuración para envío
+
 .control
   .row.align-middle.align-justify
-    .columns.small-24.medium-5= f.label :contact_page_id
-    .columns.small-24.medium-18= f.select :contact_page_id, @pages.map { |p| [p.name, p.id] }, { include_blank: true }
+    .columns.small-24.medium-5= f.label :km_price
+    .columns.small-24.medium-18= f.text_field :km_price
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :shipping_notes
+    .columns.small-24.medium-18= f.cktext_area :shipping_notes, ckeditor: { toolbar: :latte, height: 400 }
 
 %h4
   Configuración correo saliente

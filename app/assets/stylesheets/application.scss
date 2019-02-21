@@ -1034,6 +1034,32 @@ form {
     padding: 0 1em;
     text-transform: uppercase;
   }
+
+  .head {
+    margin: 2em 0 0;
+  }
+
+  .head,
+  .products-list,
+  .totals {
+    strong {
+      margin: 0;
+    }
+
+    .row {
+      padding: .5em;
+    }
+  }
+
+  .products-list {
+    .row:nth-child(odd) {
+      background: darken($white, 7%);
+    }
+  }
+
+  .totals {
+    border-top: 3px darken($white, 10%) solid;
+  }
 }
 
 .trucks {

@@ -13,6 +13,17 @@ class QuotationProduct < ApplicationRecord
                          greater_than: 0
                        }
 
+  before_create :fill_product_fields!
+  #
+  def fill_product_fields!
+    self.name  = product.name
+    self.price = product.price
+  end
+
+  def subtotal
+    quantity.to_f * price
+  end
+
   def percent_in_truck
     100.0 / product.units_by_truck * quantity.to_f
   end

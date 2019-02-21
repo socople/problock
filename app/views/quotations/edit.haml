@@ -34,7 +34,7 @@
                   = ff.fields_for :truck_quotation_products do |fff|
                     .truck-item{ data: { percent: fff.object.percent_in_truck.round } }
                       = fff.hidden_field :truck_id
-                      #{fff.object.quotation_product.product.name}: #{fff.object.quantity}
+                      #{fff.object.quotation_product.name}: #{fff.object.quantity}
 
                 .control
                   %strong ¿Cuándo desea recibir este camión?

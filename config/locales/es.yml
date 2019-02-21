@@ -119,6 +119,8 @@ es:
         inbox_name: Nombre bandeja de entrada
         inbox_email: Email bandeja de entrada
         favicon: Favicon
+        km_price: Precio por kilómetro
+        shipping_notes: Notas para envío
       activity_log:
         item_type: Tipo
         item_id: Nombre

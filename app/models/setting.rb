@@ -4,6 +4,11 @@ class Setting < ApplicationRecord
 
   translates :app_title, :app_description
 
+  validates :km_price, presence: true,
+                       numericality: {
+                         greater_than: 0.0
+                       }
+
   ##
   # Gimmick paperclip
   has_attached_file :gimmick,

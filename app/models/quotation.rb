@@ -5,14 +5,12 @@ class Quotation < ApplicationRecord
   #
   attr_accessor :expected_asap
   #
-  has_many :trucks, -> { order_by_products }
-
+  has_many :trucks, -> { order_by_products }, dependent: :destroy
   accepts_nested_attributes_for :trucks
 
   has_many :truck_quotation_products, through: :trucks
 
   has_many :quotation_products, dependent: :destroy
-
   accepts_nested_attributes_for :quotation_products,
                                 allow_destroy: true
 
@@ -32,14 +30,32 @@ class Quotation < ApplicationRecord
             presence: true,
             unless: proc { |o| o.phone.present? }
 
+  def products_total
+    quotation_products.map(&:subtotal).sum
+  end
+
+  def total
+    products_total + shipping_price
+  end
+
   def qp2accommodate
     quotation_products.reload
     quotation_products.select  { |x| x.pending.positive? }
                       .sort_by { |x| -x.pending }
   end
 
-  after_create :accommodate_products
+  after_create :complete_info
   #
+  def complete_info
+    accommodate_products
+    set_shipping_price!
+  end
+
+  def set_shipping_price!
+    update_column :shipping_price,
+                  distance / 1000.0 * Setting.km_price * trucks.count
+  end
+
   def accommodate_products
     qp = qp2accommodate
     while qp.any?

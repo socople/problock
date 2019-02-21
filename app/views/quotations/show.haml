@@ -1,0 +1,55 @@
+.quotations
+  .container
+    .breadcrumb
+      = render_breadcrumbs separator: ' / '
+
+    %h1 Cotizador
+
+    %h3
+      Detalle de su pedido
+
+    .head
+      .row.align-justify
+        .columns.small-12
+          %strong Nombre
+        .columns.small-3
+          %strong Cantidad
+        .columns.small-3
+          %strong Precio unitario
+        .columns.small-3
+          %strong Subtotal
+
+    .products-list
+      - @quotation.quotation_products.each do |o|
+        .row.align-justify
+          .columns.small-12
+            = o.name
+          .columns.small-3
+            = o.quantity
+          .columns.small-3
+            = number_to_currency o.price
+          .columns.small-3
+            = number_to_currency o.subtotal
+
+    .totals
+      .row.align-justify
+        .columns.small-18
+          %strong Total productos
+        .columns.small-3
+          = number_to_currency @quotation.products_total
+      .row.align-justify
+        .columns.small-18
+          %strong Costo de envío
+        .columns.small-3
+          = number_to_currency @quotation.shipping_price
+      .row.align-justify
+        .columns.small-18
+          %strong Total a cancelar
+        .columns.small-3
+          %b= number_to_currency @quotation.total
+
+    %h3
+      Notas y consideraciones
+
+    .content
+      = raw Setting.shipping_notes
