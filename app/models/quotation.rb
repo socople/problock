@@ -5,9 +5,14 @@ class Quotation < ApplicationRecord
   #
   attr_accessor :expected_asap
   #
-  has_many :trucks
+  has_many :trucks, -> { order_by_products }
+
+  accepts_nested_attributes_for :trucks
+
   has_many :truck_quotation_products, through: :trucks
+
   has_many :quotation_products, dependent: :destroy
+
   accepts_nested_attributes_for :quotation_products,
                                 allow_destroy: true
 

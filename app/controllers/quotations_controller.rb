@@ -20,6 +20,13 @@ class QuotationsController < ApplicationController
     @quotation = Quotation.find params[:id]
   end
 
+  def update
+    @quotation = Quotation.find params[:id]
+    @quotation.update_attributes(truck_params)
+
+    redirect_to edit_quotation_url(@quotation)
+  end
+
   def init_form
     @categories = Category.with_products.order :name
   end
@@ -28,6 +35,15 @@ class QuotationsController < ApplicationController
     params.require(:quotation).permit(
       :customer_name, :email, :phone, :cellphone, :address, :distance,
       quotation_products_attributes: %i[id product_id quantity _destroy]
+    )
+  end
+
+  def truck_params
+    params.require(:quotation).permit(
+      trucks_attributes: [
+        :id, :expected_asap, :expected_date,
+        truck_quotation_products_attributes: %i[id truck_id]
+      ]
     )
   end
 

@@ -869,13 +869,13 @@ select {
 
 .date-select-container {
   display: flex;
-  margin: 0 -1em;
+  padding: 0 .8em;
 
   select {
+    color: $black;
     display: inline-block;
     flex: 1;
-    margin: 0 1em;
-    width: auto;
+    margin: 0 .25em;
   }
 }
 
@@ -1007,15 +1007,15 @@ form {
   }
 
   .radios {
-    margin: 1.3em 0;
+    margin: 1em 0;
   }
 
   .radio {
     cursor: pointer;
     display: block;
-    font-size: .8em;
+    font-size: .75em;
     font-style: italic;
-    margin: 1em 0;
+    margin: .8em 0;
     text-transform: uppercase;
   }
 
@@ -1036,15 +1036,46 @@ form {
   }
 }
 
+.trucks {
+  margin: 0 -1em;
+
+  h3 {
+    margin: .3em 0;
+  }
+}
+
 .truck {
   background: darken($white, 10%);
-  min-height: 6em;
-  padding: .5em;
+  border-radius: .5em;
+  margin: 1em;
+  padding: .8em;
+
+  &.overloaded {
+    background: $red;
+    color: $white;
+
+    .disclaimer {
+      display: block;
+    }
+  }
+
+  .disclaimer {
+    background: $white;
+    color: $yellow;
+    display: none;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 1.25;
+    padding: .5em;
+    text-align: center;
+  }
 }
 
 .truck-item {
-  background: $white;
+  background: $white image-url('icon-move.png') center right .5em no-repeat;
+  background-size: 20px;
   border: 1px $purple solid;
+  color: $black;
   cursor: grab;
   margin: .5em 0;
   padding: .5em 1em;

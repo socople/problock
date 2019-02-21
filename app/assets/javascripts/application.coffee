@@ -14,25 +14,53 @@
 
 $ ->
 
+  checkOverloaded = ->
+    setTimeout (->
+      $('.truck').removeClass('overloaded')
+      $.each $('.truck'), (_, truck) ->
+        count = 0
+        $.each $(truck).find('.truck-item'), (_, item) ->
+          count = count + $(item).data('percent')
+        console.log count
+        if count > 100
+          $(truck).addClass('overloaded')
+    ), 100
+
+  setTruckIds = ->
+    setTimeout (->
+      $.each $('.truck'), (_, truck) ->
+        $(truck).find("[name*=truck_id]").val($(this).data('id'))
+    ), 100
+
+  $('.date-select-container').hide()
+  $('.truck [type=radio]').on 'change', ->
+    container = $(this).closest('.truck').find('.date-select-container')
+    if $(this).val() == '0'
+      container.fadeIn()
+    else
+      container.fadeOut()
+
   $ph = aixsY = null
-  $('.draggable').hqyDraggable
-  	proxy: 'clone'
-  	onStartDrag: (event, target) ->
-  		$(target).width($(this).width())
+  $('.truck-item').hqyDraggable
+    proxy: 'clone'
+    onStartDrag: (event, target) ->
+      $(target).width($(this).width())
 
-  		$ph = $(this).clone()
-  		$ph.addClass('op2')
-  		$(this).hide().before($ph)
+      $ph = $(this).clone()
+      $ph.addClass('op2')
+      $(this).hide().before($ph)
 
-  	onStopDrag: ->
-  		$ph.after(this)
-  		$ph.remove()
-  		$ph = null
-  		$(this).show()
+    onStopDrag: ->
+      $ph.after(this)
+      $ph.remove()
+      $ph = null
+      $(this).show()
+      setTruckIds()
+      checkOverloaded()
 
-  $('.droppable').hqyDroppable
-  	onDragEnter: (event, target) ->
-  		$(this).append($ph)
+  $('.truck').hqyDroppable
+    onDragEnter: (event, target) ->
+      $(this).find('.products-list').append($ph)
 
 
   $('.slider').each (_, s) ->

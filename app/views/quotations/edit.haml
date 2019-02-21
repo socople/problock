@@ -8,19 +8,50 @@
     %h3
       Serán necesarios #{@quotation.trucks.length} camiones para la entrega de su pedido
     %p
-      Por favor, arrastre los productos para ordenarlos dentro de los camiones
-      y establesca la fecha de entrega de cada uno.
+      Puede
+      %b arrastrar
+      los productos para
+      %b ordenarlos
+      dentro de los camiones
+      y establecer una fecha de entrega para cada uno.
 
+    .trucks
+      = form_for @quotation do |f|
+        .row
+          - counter = 1
+          = f.fields_for :trucks do |ff|
+            .columns.small-24.medium-12.large-8
+              .truck{ data: { id: ff.object.id } }
+                %h3 Camión #{counter}
+                - counter += 1
 
-    .row.align-spaced
-      - @quotation.trucks.each_with_index do |truck, i|
-        .columns.small-7
-          Camión
-          %b= (1 + i)
-          .truck.droppable
+                .disclaimer
+                  Camión sobrecargado, por favor mueva alguno de los productos
+                  a otro camión
 
-            - truck.truck_quotation_products.each do |o|
-              .truck-item.draggable
-                #{o.quotation_product.product.name}: #{o.quantity}
-                -# %br
-                -# %b= o.percent_in_truck
+                %strong Productos en el camión
+                .products-list
+                  = ff.fields_for :truck_quotation_products do |fff|
+                    .truck-item{ data: { percent: fff.object.percent_in_truck.round } }
+                      = fff.hidden_field :truck_id
+                      #{fff.object.quotation_product.product.name}: #{fff.object.quantity}
+
+                .control
+                  %strong ¿Cuándo desea recibir este camión?
+
+                  .radios
+                    = ff.label :expected_asap_1, class: 'radio' do
+                      = ff.radio_button :expected_asap, '1', { checked: true }
+                      Tan pronto como sea posible
+
+                    = ff.label :expected_asap_0, class: 'radio' do
+                      = ff.radio_button :expected_asap, '0', {}
+                      Seleccionar fecha
+
+                  .date-select-container
+                    = ff.date_select :expected_date, {}, { class: 'date' }
+
+        .row.align-center
+          .columns.small-20.medium-6.large-4
+            = f.button type: :submit, name: nil, class: 'btn' do
+              Cotizar
