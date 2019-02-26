@@ -1,7 +1,7 @@
 #
 class QuotationCategory < ApplicationRecord
   #
-  has_many :products
+  has_many :products, -> { order(:priority) }
   ##
   # Include this concern to enable csv exportation on Latte for this model
   # Don't forget define exportable_fields method in controller

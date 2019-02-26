@@ -2,7 +2,7 @@
   .row.align-justify
     .columns.small-12.medium-17.larage-17
       .control
-        = f.grouped_collection_select :product_id, @categories, :ordered_products, :name, :id, :name, include_blank: '-- Seleccione --'
+        = f.grouped_collection_select :product_id, @quotation_categories, :products, :name, :id, :name, include_blank: '-- Seleccione --'
     .columns.small-4.medium-3.large-3
       .control
         = f.text_field :quantity

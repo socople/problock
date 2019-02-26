@@ -32,7 +32,7 @@ class QuotationsController < ApplicationController
   end
 
   def init_form
-    @categories = Category.with_products.order :name
+    @quotation_categories = QuotationCategory.priority
   end
 
   def item_params
