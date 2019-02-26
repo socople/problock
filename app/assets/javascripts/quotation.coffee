@@ -19,8 +19,17 @@ defaultend = null
     })
 
     geocoder = new google.maps.Geocoder()
+
+    document.getElementById('quotation_address').onkeypress = (e) ->
+      code = if e.keyCode then e.keyCode else e.which
+      if code == 13
+        e.preventDefault()
+        geocodeAddress(geocoder, map)
+        window.location.hash = 'quotation-map'
+
     document.getElementById('quotation_address').addEventListener 'blur', ->
       geocodeAddress(geocoder, map)
+      window.location.hash = 'quotation-map'
 
     directionsService = new google.maps.DirectionsService
     directionsDisplay = new google.maps.DirectionsRenderer({
