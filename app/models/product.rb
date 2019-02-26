@@ -1,6 +1,7 @@
 #
 class Product < ApplicationRecord
   belongs_to :category
+  belongs_to :quotation_category, optional: true
 
   ##
   # Include this concern to enable csv exportation on Latte for this model
@@ -21,6 +22,10 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :category_id, presence: true
   validates :priority,
+            numericality: {
+              only_integer: true
+            }
+  validates :quotation_priority,
             numericality: {
               only_integer: true
             }

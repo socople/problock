@@ -79,6 +79,7 @@ Rails.application.routes.draw do
       products
       projects
       contacts
+      quotation_categories
     ].each do |resource|
       resources resource do
         put :updates,  on: :collection

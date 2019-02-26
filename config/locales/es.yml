@@ -22,6 +22,9 @@ es:
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
 
     models:
+      quotation_category:
+        one: Categoría para cotizador
+        other: Categorías para cotizador
       contact:
         one: Contacto
         other: Contactos
@@ -69,6 +72,9 @@ es:
         other: Imágenes de portada
 
     attributes:
+      quotation_category:
+        priority: Prioridad
+        name: Nombre
       contact:
         name: Nombre
         phone: Teléfono
@@ -87,6 +93,9 @@ es:
         description: Descripción
         price: Precio unitario
         units_by_truck: Unidades máximas por camión
+        quotation_category: Categoría para cotizador
+        quotation_category_id: Categoría para cotizador
+        quotation_priority: Prioridad para cotizador
       category:
         featured: ¿Destacada?
         category_id: Categoría padre

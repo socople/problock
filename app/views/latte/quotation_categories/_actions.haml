@@ -1,0 +1,19 @@
+.row.align-middle
+  .columns.shrink
+    .actions
+      .row.align-middle
+        .columns.shrink
+          %input.decorated-checkbox.box{ type: :checkbox, class: 'all', ng: { model: 'checkboxes.checked' }}
+
+        .columns
+          %div{ ng: { show: 'checkboxes.checked || indeterminate' }}
+            = link_to nil, class: 'btn', 'ng-click' => 'deleteSelection($event)' do
+              %i.material-icons delete
+
+          %strong.total-entries{ 'ng-bind' => "total_entries + ' Registros'" }
+
+  .columns
+    .visibility-controls
+      = label_tag nil, 'ng-repeat' => 'col in table.cols' do
+        %input{ type: :checkbox, ng: { model_options: "{ getterSetter: true }", model: 'col.show' }}
+        %span {{ col.title() }}

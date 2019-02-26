@@ -1,0 +1,3 @@
+#
+class QuotationCategoryPolicy < ApplicationPolicy
+end

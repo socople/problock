@@ -10,6 +10,16 @@
 
 .control
   .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :quotation_category_id
+    .columns.small-24.medium-18= f.select :quotation_category_id, @quotation_categories.map{ |o| [o.name, o.id] }, include_blank: '-- Seleccione --'
+
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :quotation_priority
+    .columns.small-24.medium-18= f.text_field :quotation_priority
+
+.control
+  .row.align-middle.align-justify
     .columns.small-24.medium-5= f.label :price
     .columns.small-24.medium-18= f.text_field :price
 
