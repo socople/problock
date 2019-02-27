@@ -996,7 +996,8 @@ form {
     font-family: 'Squada One', cursive;
     font-size: 1.1em;
     font-weight: normal;
-    margin: 1.5em 0 0;
+    line-height: 1.1;
+    margin: 1.5em 0 .5em;
     text-transform: uppercase;
   }
 
@@ -1120,5 +1121,24 @@ form {
   b,
   i {
     font-size: .9em;
+  }
+}
+
+.move-b-example {
+  .popup {
+    background: $white;
+    border-radius: .5em;
+    padding: .5em 1.5em 1.5em;
+    text-align: center;
+  }
+
+  p {
+    font-weight: $bold;
+    line-height: 1.3;
+  }
+
+  .btn {
+    padding: 0 2em;
+    width: auto;
   }
 }

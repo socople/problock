@@ -21,7 +21,7 @@ module Latte
       %i[contact_page_id smtp_host smtp_port smtp_domain smtp_username
          smtp_password smtp_sender_name inbox_name inbox_email
          google_analytics_id app_title app_description gimmick delete_gimmick
-         favicon delete_favicon km_price shipping_notes]
+         favicon delete_favicon km_price km_extra_price shipping_notes]
     end
 
     def init_form

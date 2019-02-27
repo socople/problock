@@ -44,13 +44,24 @@
     .columns.small-24
       .control
         %strong Dirección
-        = f.text_field :address
+        = f.text_field :address, autocomplete: :off
 
   .control
     %strong
       Arrastre el punto "B" hasta el lugar de entrega, si es necesario
     #quotation-map.map.large
     = f.hidden_field :distance
+
+    #move-b-example.overlay.move-b-example{ data: { popup: 'move-b-example' }}
+      .popup
+        %p Arrastre el punto "B" hasta el lugar de entrega, si es necesario.
+        = image_tag 'move-b-example.gif'
+        = link_to 'Entendido', nil, class: 'btn', data: { close: 'move-b-example' }
+
+  .control
+    %strong
+      ¿Cuántos kilómetros hay entre el lugar de entrega y el punto "B"?
+    = f.select :distance_extra, (0..10).map { |o| ["#{o} km#{o.zero? ? ' (La entrega es exactamente en el punto "B")' : ''}", o] }, include_blank: '-- Seleccione --'
 
   .row.align-center
     .columns.small-20.medium-6.large-4

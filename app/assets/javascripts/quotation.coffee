@@ -25,10 +25,12 @@ defaultend = null
       if code == 13
         e.preventDefault()
         geocodeAddress(geocoder, map)
+        showExample()
         window.location.hash = 'quotation-map'
 
     document.getElementById('quotation_address').addEventListener 'blur', ->
       geocodeAddress(geocoder, map)
+      showExample()
       window.location.hash = 'quotation-map'
 
     directionsService = new google.maps.DirectionsService
@@ -39,6 +41,10 @@ defaultend = null
 
     directionsDisplay.addListener 'directions_changed', ->
       computeTotalDistance(directionsDisplay.getDirections())
+
+@showExample = ->
+  if document.getElementById('move-b-example')
+    document.getElementById('move-b-example').style.display = 'block'
 
 @geocodeAddress = (geocoder, resultsMap) ->
   address = document.getElementById('quotation_address').value

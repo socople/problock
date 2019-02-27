@@ -22,6 +22,12 @@ class Quotation < ApplicationRecord
             format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i },
             if: proc { |o| o.email.present? }
 
+  validates :distance_extra,
+            presence: true,
+            numericality: {
+              only_integer: true
+            }
+
   validates :phone,
             presence: true,
             unless: proc { |o| o.cellphone.present? }
@@ -52,8 +58,23 @@ class Quotation < ApplicationRecord
   end
 
   def set_shipping_price!
-    update_column :shipping_price,
-                  distance / 1000.0 * Setting.km_price * trucks.count * 2
+    update_column :shipping_price, total_distance_price
+  end
+
+  def total_distance_price
+    extra = distance_extra_price
+    return distance_price if extra.zero?
+
+    distance_price + extra
+  end
+
+  def distance_price
+    distance / 1000.0 * Setting.km_price * trucks.count * 2
+  end
+
+  def distance_extra_price
+    return 0 if distance_extra.zero?
+    distance_extra * Setting.km_extra_price * trucks.count * 2
   end
 
   def accommodate_products

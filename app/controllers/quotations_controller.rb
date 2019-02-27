@@ -43,6 +43,7 @@ class QuotationsController < ApplicationController
   def item_params
     params.require(:quotation).permit(
       :customer_name, :email, :phone, :cellphone, :address, :distance,
+      :distance_extra,
       quotation_products_attributes: %i[id product_id quantity _destroy]
     )
   end

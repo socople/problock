@@ -129,6 +129,7 @@ es:
         inbox_email: Email bandeja de entrada
         favicon: Favicon
         km_price: Precio por kilómetro
+        km_extra_price: Precio por kilómetro extra
         shipping_notes: Notas para envío
       activity_log:
         item_type: Tipo
