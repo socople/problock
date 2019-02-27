@@ -55,3 +55,18 @@
           .columns.small-20.medium-6.large-4
             = f.button type: :submit, name: nil, class: 'btn' do
               Cotizar
+
+    .info
+      %h3
+        Cada camión puede transportar:
+
+      - if @products.any?
+        .row.align-spaced
+          - @products.each_slice((@products.count / 4.0).ceil) do |slice|
+            .columns.small-20.medium-10.large-5
+              - slice.each do |o|
+                .row
+                  .columns.small-6
+                    %b= o.units_by_truck
+                  .columns.small-18
+                    %i= o.name

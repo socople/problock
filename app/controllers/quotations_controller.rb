@@ -18,6 +18,11 @@ class QuotationsController < ApplicationController
 
   def edit
     @quotation = Quotation.find params[:id]
+    @products  = Product
+                 .includes(:quotation_category)
+                 .where('units_by_truck > 0')
+                 .order('quotation_categories.priority ASC,
+                   products.priority ASC')
   end
 
   def show

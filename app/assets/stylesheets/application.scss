@@ -1071,7 +1071,7 @@ form {
 }
 
 .truck {
-  background: darken($white, 10%);
+  background: darken($white, 5%);
   border-radius: .5em;
   margin: 1em;
   padding: .8em;
@@ -1105,4 +1105,15 @@ form {
   cursor: grab;
   margin: .5em 0;
   padding: .5em 1em;
+}
+
+.info {
+  background: darken($white, 5%);
+  border-radius: .5em;
+  margin: 3em 0 0;
+  padding: 2em 1em;
+
+  h3 {
+    margin: 0 0 1em;
+  }
 }

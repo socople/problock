@@ -53,7 +53,7 @@ class Quotation < ApplicationRecord
 
   def set_shipping_price!
     update_column :shipping_price,
-                  distance / 1000.0 * Setting.km_price * trucks.count
+                  distance / 1000.0 * Setting.km_price * trucks.count * 2
   end
 
   def accommodate_products
