@@ -4,7 +4,7 @@ class Truck < ApplicationRecord
 
   belongs_to :quotation
   has_many :truck_quotation_products, dependent: :destroy
-  accepts_nested_attributes_for :truck_quotation_products
+  accepts_nested_attributes_for :truck_quotation_products, allow_destroy: true
 
   def accommodated_products_percent
     truck_quotation_products

@@ -58,7 +58,18 @@ class Quotation < ApplicationRecord
   end
 
   def set_shipping_price!
-    update_column :shipping_price, total_distance_price
+    update_column :shipping_price, calculated_shipping_price
+  end
+
+  def calculated_shipping_price
+    if (distance / 1000.0) + distance_extra <= Setting.fixed_price_distance
+      return fixed_shipping_price
+    end
+    total_distance_price
+  end
+
+  def fixed_shipping_price
+    Setting.fixed_price_distance * trucks.count
   end
 
   def total_distance_price
@@ -93,6 +104,24 @@ class Quotation < ApplicationRecord
               quantity: o.fittable_quantity
 
       t.save
+    end
+  end
+
+  def cleanup!
+    remove_unused_trucks!
+    refresh_quantities!
+    set_shipping_price!
+  end
+
+  def remove_unused_trucks!
+    trucks.each do |o|
+      o.destroy if o.truck_quotation_products.empty?
+    end
+  end
+
+  def refresh_quantities!
+    quotation_products.each do |o|
+      o.update_column :quantity, o.truck_quotation_products.sum(:quantity)
     end
   end
 end

@@ -82,6 +82,11 @@ h4 {
     border: 1px $black solid;
     color: $black;
   }
+
+  &.disabled {
+    background: darken($white, 10%);
+    color: darken($white, 30%);
+  }
 }
 
 .panels {
@@ -1106,6 +1111,21 @@ form {
   cursor: grab;
   margin: .5em 0;
   padding: .5em 1em;
+
+  a {
+    color: $purple;
+    font-size: .8em;
+    margin: 0 .5em 0 0;
+    text-decoration: underline;
+
+    &.delete {
+      color: $red;
+    }
+  }
+
+  span {
+    font-weight: $bold;
+  }
 }
 
 .info {

@@ -32,9 +32,19 @@
                 %strong Productos en el camión
                 .products-list
                   = ff.fields_for :truck_quotation_products do |fff|
-                    .truck-item{ data: { percent: fff.object.percent_in_truck.round } }
+                    .truck-item{ data: { percent: fff.object.percent_in_truck.round(4) } }
                       = fff.hidden_field :truck_id
-                      #{fff.object.quotation_product.name}: #{fff.object.quantity}
+                      = fff.hidden_field :quantity, class: 'quantity'
+                      = fff.hidden_field :_destroy, class: 'destroy'
+
+                      .actions
+                        = link_to nil, class: 'change' do
+                          Cambiar cantidad
+
+                        = link_to nil, class: 'delete' do
+                          Quitar del camión
+
+                      %small= raw "#{fff.object.name_html}"
 
                 .control
                   %strong ¿Cuándo desea recibir este camión?

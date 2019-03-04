@@ -33,6 +33,11 @@
     .columns.small-24.medium-5= f.label :name
     .columns.small-24.medium-18= f.text_field :name
 
+.control
+  .row.align-middle.align-justify
+    .columns.small-24.medium-5= f.label :units
+    .columns.small-24.medium-18= f.text_field :units
+
 - if f.object.class.respond_to?(:main_image?)
   = f.fields_for :main_image do |ff|
     = render partial: 'latte/main_images/form', locals: { f: ff }

@@ -14,16 +14,55 @@
 
 $ ->
 
+  $('.truck-item .delete').on 'click', (e) ->
+    e.preventDefault()
+
+    if confirm('¿Está seguro?')
+      item = $(this).closest('.truck-item')
+      item.find('.destroy').val("1")
+      item.fadeOut 'fast', ->
+        checkOverloaded()
+
+  $('.truck-item .change').on 'click', (e) ->
+    e.preventDefault()
+
+    item = $(this).closest('.truck-item')
+    input = item.find('.quantity')
+    elemt = item.find('span')
+    current_quantity = input.val()
+
+    new_quantity = prompt('Ingrese la nueva cantidad', current_quantity)
+    if new_quantity == null || (parseInt(new_quantity) + '') != new_quantity || new_quantity < 1
+      new_quantity = current_quantity
+      alert 'No se cambió la cantidad porque debe introducir un número entero mayor que cero'
+
+    new_percent = parseFloat(item.data('percent')) /
+                  parseInt(current_quantity) *
+                  parseInt(new_quantity)
+
+    new_percent = Math.round(new_percent * 10000) / 10000
+
+    item.data('percent', new_percent)
+    item.attr('data-percent', new_percent)
+    input.val(new_quantity)
+    elemt.text(new_quantity)
+    checkOverloaded()
+
   checkOverloaded = ->
     setTimeout (->
       $('.truck').removeClass('overloaded')
+      $('.edit_quotation .btn')
+        .removeClass('disabled')
+        .attr('disabled', false)
       $.each $('.truck'), (_, truck) ->
         count = 0
-        $.each $(truck).find('.truck-item'), (_, item) ->
-          count = count + $(item).data('percent')
-        console.log count
+        $.each $(truck).find('.truck-item:visible'), (_, item) ->
+          count = count + parseFloat($(item).data('percent'))
         if count > 100
           $(truck).addClass('overloaded')
+          $('.edit_quotation .btn')
+            .addClass('disabled')
+            .attr('disabled', true)
     ), 100
 
   setTruckIds = ->

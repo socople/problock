@@ -32,6 +32,7 @@ class QuotationsController < ApplicationController
   def update
     @quotation = Quotation.find params[:id]
     @quotation.update_attributes(truck_params)
+    @quotation.cleanup!
 
     redirect_to quotation_url(@quotation)
   end
@@ -52,7 +53,7 @@ class QuotationsController < ApplicationController
     params.require(:quotation).permit(
       trucks_attributes: [
         :id, :expected_asap, :expected_date,
-        truck_quotation_products_attributes: %i[id truck_id]
+        truck_quotation_products_attributes: %i[id truck_id quantity _destroy]
       ]
     )
   end

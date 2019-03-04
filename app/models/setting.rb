@@ -9,6 +9,16 @@ class Setting < ApplicationRecord
                          greater_than: 0.0
                        }
 
+  validates :fixed_price_distance, presence: true,
+                                   numericality: {
+                                     greater_than: 0.0
+                                   }
+
+  validates :fixed_price_price, presence: true,
+                                numericality: {
+                                  greater_than: 0.0
+                                }
+
   validates :km_extra_price, presence: true,
                              numericality: {
                                greater_than: 0.0

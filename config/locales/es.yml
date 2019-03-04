@@ -96,6 +96,7 @@ es:
         quotation_category: Categoría para cotizador
         quotation_category_id: Categoría para cotizador
         quotation_priority: Prioridad para cotizador
+        units: Unidades
       category:
         featured: ¿Destacada?
         category_id: Categoría padre
@@ -131,6 +132,8 @@ es:
         km_price: Precio por kilómetro
         km_extra_price: Precio por kilómetro extra
         shipping_notes: Notas para envío
+        fixed_price_distance: Distancia máxima para cobrar precio fijo
+        fixed_price_price: Precio fijo a cobrar dentro de distancia máxima
       activity_log:
         item_type: Tipo
         item_id: Nombre
