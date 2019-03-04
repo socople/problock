@@ -121,7 +121,12 @@ class Quotation < ApplicationRecord
 
   def refresh_quantities!
     quotation_products.each do |o|
-      o.update_column :quantity, o.truck_quotation_products.sum(:quantity)
+      q = o.truck_quotation_products.sum(:quantity)
+      if q.zero?
+        o.destroy
+      else
+        o.update_column :quantity, o.truck_quotation_products.sum(:quantity)
+      end
     end
   end
 end
