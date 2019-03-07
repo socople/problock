@@ -1,0 +1,13 @@
+.truck-item.nested-fields{ data: { percent: f.object.percent_in_truck.round(4) } }
+  = f.hidden_field :id
+  = f.hidden_field :truck_id
+  = f.hidden_field :quotation_product_id
+  = f.hidden_field :quantity, class: 'quantity'
+
+  .actions
+    = link_to nil, class: 'change' do
+      Cambiar cantidad
+
+    = link_to_remove_association 'Quitar del camión', f, class: 'delete-truck-item'
+
+  %small= raw "#{f.object.name_html}"

@@ -1,0 +1,35 @@
+.columns.small-24.medium-12.large-8.nested-fields
+  .truck{ data: { id: f.object.id } }
+    = f.hidden_field :quotation_id
+    %h3
+      Camión
+      %span.truck-counter
+
+    = link_to_remove_association 'x', f, class: 'remove-truck', title: 'Quitar camión'
+    .disclaimer
+      Camión sobrecargado, por favor mueva alguno de los productos
+      a otro camión
+
+    .empty-truck
+      Este camión está vacío y NO será considerado a la hora de
+      calcular el costo de su envío
+
+    %strong Productos en el camión
+    .products-list
+      = f.fields_for :truck_quotation_products do |ff|
+        = render 'truck_quotation_product_fields', { f: ff }
+
+    .control
+      %strong ¿Cuándo desea recibir este camión?
+
+      .radios
+        = f.label :expected_asap_1, class: 'radio' do
+          = f.radio_button :expected_asap, '1', { checked: true }
+          Tan pronto como sea posible
+
+        = f.label :expected_asap_0, class: 'radio' do
+          = f.radio_button :expected_asap, '0', {}
+          Seleccionar fecha
+
+      .date-select-container
+        = f.date_select :expected_date, {}, { class: 'date' }

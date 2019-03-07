@@ -52,8 +52,10 @@ class QuotationsController < ApplicationController
   def truck_params
     params.require(:quotation).permit(
       trucks_attributes: [
-        :id, :expected_asap, :expected_date,
-        truck_quotation_products_attributes: %i[id truck_id quantity _destroy]
+        :id, :quotation_id, :expected_asap, :expected_date, :_destroy,
+        truck_quotation_products_attributes: %i[
+          id truck_id quotation_product_id quantity _destroy
+        ]
       ]
     )
   end

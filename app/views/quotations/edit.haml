@@ -17,49 +17,12 @@
 
     .trucks
       = form_for @quotation do |f|
-        .row
-          - counter = 1
+        #trucks.row
           = f.fields_for :trucks do |ff|
-            .columns.small-24.medium-12.large-8
-              .truck{ data: { id: ff.object.id } }
-                %h3 Camión #{counter}
-                - counter += 1
+            = render 'truck_fields', { f: ff }
+          .columns.small-24.medium-12.large-8
+            = link_to_add_association '<span>+ Agregar otro camión</span>'.html_safe, f, :trucks, class: 'add-truck'
 
-                .disclaimer
-                  Camión sobrecargado, por favor mueva alguno de los productos
-                  a otro camión
-
-                %strong Productos en el camión
-                .products-list
-                  = ff.fields_for :truck_quotation_products do |fff|
-                    .truck-item{ data: { percent: fff.object.percent_in_truck.round(4) } }
-                      = fff.hidden_field :truck_id
-                      = fff.hidden_field :quantity, class: 'quantity'
-                      = fff.hidden_field :_destroy, class: 'destroy'
-
-                      .actions
-                        = link_to nil, class: 'change' do
-                          Cambiar cantidad
-
-                        = link_to nil, class: 'delete' do
-                          Quitar del camión
-
-                      %small= raw "#{fff.object.name_html}"
-
-                .control
-                  %strong ¿Cuándo desea recibir este camión?
-
-                  .radios
-                    = ff.label :expected_asap_1, class: 'radio' do
-                      = ff.radio_button :expected_asap, '1', { checked: true }
-                      Tan pronto como sea posible
-
-                    = ff.label :expected_asap_0, class: 'radio' do
-                      = ff.radio_button :expected_asap, '0', {}
-                      Seleccionar fecha
-
-                  .date-select-container
-                    = ff.date_select :expected_date, {}, { class: 'date' }
 
         .info
           %h3

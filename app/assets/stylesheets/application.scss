@@ -1081,6 +1081,7 @@ form {
   border-radius: .5em;
   margin: 1em;
   padding: .8em;
+  position: relative;
 
   &.overloaded {
     background: $red;
@@ -1089,17 +1090,76 @@ form {
     .disclaimer {
       display: block;
     }
+
+    .remove-truck {
+      border-color: $white;
+      color: $white;
+    }
   }
 
-  .disclaimer {
+  &.empty {
+    .empty-truck {
+      display: block;
+    }
+  }
+
+  .remove-truck {
+    border: 2px $red solid;
+    border-radius: 1em;
+    color: $red;
+    font-size: 1.2em;
+    font-weight: $bold;
+    height: 1.4em;
+    line-height: 1;
+    position: absolute;
+    right: .7em;
+    text-align: center;
+    top: .8em;
+    width: 1.4em;
+  }
+
+  .disclaimer,
+  .empty-truck {
     background: $white;
     color: $yellow;
     display: none;
+    font-size: .9em;
     font-style: italic;
     font-weight: bold;
     line-height: 1.25;
+    margin: 1em 0 0;
     padding: .5em;
     text-align: center;
+  }
+
+  .empty-truck {
+    border: 1px $red solid;
+  }
+}
+
+.add-truck {
+  background: darken($white, 5%);
+  border: 2px $purple dashed;
+  border-radius: .5em;
+  display: block;
+  height: calc(100% - 2em);
+  margin: 1em;
+  min-height: 6em;
+  padding: .8em;
+  position: relative;
+
+  span {
+    color: $purple;
+    font-weight: $bold;
+    left: 50%;
+    line-height: 1.2;
+    margin: 0 auto;
+    max-width: 90%;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -1111,6 +1171,7 @@ form {
   cursor: grab;
   margin: .5em 0;
   padding: .5em 1em;
+  z-index: 2;
 
   a {
     color: $purple;
@@ -1118,7 +1179,7 @@ form {
     margin: 0 .5em 0 0;
     text-decoration: underline;
 
-    &.delete {
+    &.delete-truck-item {
       color: $red;
     }
   }

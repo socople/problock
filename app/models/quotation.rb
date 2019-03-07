@@ -6,7 +6,8 @@ class Quotation < ApplicationRecord
   attr_accessor :expected_asap
   #
   has_many :trucks, -> { order_by_products }, dependent: :destroy
-  accepts_nested_attributes_for :trucks
+  accepts_nested_attributes_for :trucks,
+                                allow_destroy: true
 
   has_many :truck_quotation_products, through: :trucks
 
@@ -115,7 +116,7 @@ class Quotation < ApplicationRecord
 
   def remove_unused_trucks!
     trucks.each do |o|
-      o.destroy if o.truck_quotation_products.empty?
+      o.destroy unless o.truck_quotation_products.reload.any?
     end
   end
 

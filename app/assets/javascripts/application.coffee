@@ -14,14 +14,23 @@
 
 $ ->
 
-  $('.truck-item .delete').on 'click', (e) ->
-    e.preventDefault()
+  $('#trucks').on 'cocoon:after-insert', (e, insertedItem) ->
+    item = $(insertedItem)
+    item.find('.truck').hqyDroppable droppableProps
+    checkEmpty()
+    placeTruckCounter()
 
-    if confirm('¿Está seguro?')
-      item = $(this).closest('.truck-item')
-      item.find('.destroy').val("1")
-      item.fadeOut 'fast', ->
-        checkOverloaded()
+  $('#trucks').on 'cocoon:before-remove', (e, insertedItem) ->
+    message = 'Eliminará el camión y todos los productos en él\n¿Está seguro?'
+    if $(e.target).hasClass('products-list')
+      message = 'Eliminará este producto del camión\n¿Está seguro?'
+    if !confirm(message)
+      e.preventDefault()
+
+  $('#trucks').on 'cocoon:after-remove', ->
+    checkOverloaded()
+    checkEmpty()
+    placeTruckCounter()
 
   $('.truck-item .change').on 'click', (e) ->
     e.preventDefault()
@@ -47,6 +56,23 @@ $ ->
     input.val(new_quantity)
     elemt.text(new_quantity)
     checkOverloaded()
+    checkEmpty()
+
+  placeTruckCounter = ->
+    counter = 0
+    $.each $('.truck:visible'), (_, truck) ->
+      counter++
+      $(this).find('.truck-counter').text(counter)
+
+  placeTruckCounter()
+
+  checkEmpty = ->
+    setTimeout (->
+      $('.truck').removeClass('empty')
+      $.each $('.truck'), (_, truck) ->
+        if $(truck).find('.truck-item:visible').length == 0
+          $(truck).addClass('empty')
+    ), 100
 
   checkOverloaded = ->
     setTimeout (->
@@ -65,11 +91,35 @@ $ ->
             .attr('disabled', true)
     ), 100
 
-  setTruckIds = ->
+  setTruckIds = (item) ->
     setTimeout (->
-      $.each $('.truck'), (_, truck) ->
-        $(truck).find("[name*=truck_id]").val($(this).data('id'))
+      item = $(item)
+      truck = item.closest('.truck')
+      reference_input = truck.find('[name$="[_destroy]"]').not('[name*=truck_quotation_products_attributes]')
+      truck_index     = reference_input.attr('name').match(/\[trucks_attributes\]\[(.*?)\]\[/)[1]
+      item_index      = new Date().getTime()
+
+      item.find("[name*=truck_id]").val(truck.data('id'))
+
+      if !truck.data('id')
+        helper = truck.find('.op2')
+
+        helper.find("[name*=_destroy]").val("1")
+        helper.removeClass('op2')
+
+        item.find("[name*='[id]']").remove()
+
+        setNameFor(item, truck_index, item_index, 'truck_id')
+        setNameFor(item, truck_index, item_index, 'quotation_product_id')
+        setNameFor(item, truck_index, item_index, 'quantity')
+        setNameFor(item, truck_index, item_index, '_destroy')
+      else
+        truck.find('.op2').remove()
     ), 100
+
+  setNameFor = (t, truck_index, item_index, field) ->
+    name = "quotation[trucks_attributes][#{truck_index}][truck_quotation_products_attributes][#{item_index}][#{field}]"
+    t.find("[name*='[#{field}]']").attr('name', name)
 
   $('.date-select-container').hide()
   $('.truck [type=radio]').on 'change', ->
@@ -80,7 +130,8 @@ $ ->
       container.fadeOut()
 
   $ph = aixsY = null
-  $('.truck-item').hqyDraggable
+
+  draggableProps = {
     proxy: 'clone'
     onStartDrag: (event, target) ->
       $(target).width($(this).width())
@@ -91,19 +142,23 @@ $ ->
 
     onStopDrag: ->
       $ph.after(this)
-      $ph.remove()
+      $ph.hide()
       $ph = null
       $(this).show()
-      setTruckIds()
+      setTruckIds(this)
       checkOverloaded()
+      checkEmpty()
+  }
 
-  $('.truck').hqyDroppable
+  droppableProps = {
     onDragEnter: (event, target) ->
       $(this).find('.products-list').append($ph)
+  }
 
+  $('.truck-item').hqyDraggable draggableProps
+  $('.truck').hqyDroppable droppableProps
 
   $('.slider').each (_, s) ->
-
     $(s).slick
       arrows: false
 
