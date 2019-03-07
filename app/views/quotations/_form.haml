@@ -52,11 +52,13 @@
     #quotation-map.map.large
     = f.hidden_field :distance
 
-    #move-b-example.overlay.move-b-example{ data: { popup: 'move-b-example' }}
-      .popup
-        %p Arrastre el punto "B" hasta el lugar de entrega, si es necesario.
-        = image_tag 'move-b-example.gif'
-        = link_to 'Entendido', nil, class: 'btn', data: { close: 'move-b-example' }
+    - unless session.key?(:show_map_example)
+      - session[:show_map_example] = true
+      #move-b-example.overlay.move-b-example{ data: { popup: 'move-b-example' }}
+        .popup
+          %p Arrastre el punto "B" hasta el lugar de entrega, si es necesario.
+          = image_tag 'move-b-example.gif'
+          = link_to 'Entendido', nil, class: 'btn', data: { close: 'move-b-example' }
 
   .control
     %strong

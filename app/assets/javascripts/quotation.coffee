@@ -2,6 +2,7 @@ directionsService = null
 directionsDisplay = null
 startpoint = null
 defaultend = null
+showMapExample = true
 
 @initQuotationMap = ->
   divid = 'quotation-map'
@@ -43,8 +44,9 @@ defaultend = null
       computeTotalDistance(directionsDisplay.getDirections())
 
 @showExample = ->
-  if document.getElementById('move-b-example')
+  if showMapExample && document.getElementById('move-b-example')
     document.getElementById('move-b-example').style.display = 'block'
+    showMapExample = false
 
 @geocodeAddress = (geocoder, resultsMap) ->
   address = document.getElementById('quotation_address').value
