@@ -29,9 +29,10 @@ $ ->
     item.find('.truck').hqyDroppable droppableProps
 
     item.find('.date-select-container').hide()
+    item.find('[type=radio]:first').prop('checked', true)
     item.find('[type=radio]').on 'change', ->
       container = $(this).closest('.truck').find('.date-select-container')
-      if $(this).val() == '0'
+      if $(this).val() == 'false'
         container.fadeIn()
       else
         container.fadeOut()
@@ -143,10 +144,11 @@ $ ->
   $('.date-select-container').hide()
   $('.truck [type=radio]').on 'change', ->
     container = $(this).closest('.truck').find('.date-select-container')
-    if $(this).val() == '0'
+    if $(this).val() == 'false'
       container.fadeIn()
     else
       container.fadeOut()
+  $('.truck [type=radio]:checked').trigger 'change'
 
   $ph = aixsY = null
 
