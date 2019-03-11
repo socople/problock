@@ -1006,6 +1006,13 @@ form {
     text-transform: uppercase;
   }
 
+  .red {
+    color: $red;
+    font-size: .9em;
+    font-style: italic;
+    margin: .5em 0 0;
+  }
+
   .remove {
     color: $red;
     font-weight: $bold;
