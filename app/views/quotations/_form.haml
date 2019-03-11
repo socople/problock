@@ -33,7 +33,7 @@
   #quotation-items
     = f.fields_for :quotation_products do |f|
       = render 'quotation_product_fields', f: f
-    .links.text-right
+    .links
       = link_to_add_association '+ Agregar más productos', f, :quotation_products, class: 'add-product'
 
   %h3
@@ -63,9 +63,12 @@
   .control
     %strong
       ¿Cuántos kilómetros hay entre el lugar de entrega y el punto "B"?
-    = f.select :distance_extra, (0..10).map { |o| ["#{o} km#{o.zero? ? ' (La entrega es exactamente en el punto "B")' : ''}", o] }, include_blank: '-- Seleccione --'
+    = f.select :distance_extra, [0, 5, 10, 15].map { |o| ["#{o} km#{o.zero? ? ' (La entrega es exactamente en el punto "B")' : ''}", o] }, {}
+    .red
+      En caso que el punto B no llegue hasta su obra, especifique cuantos kilómetros restan aproximadamente.
 
   .row.align-center
     .columns.small-20.medium-6.large-4
+      = f.hidden_field :act, value: :c
       = f.button type: :submit, name: nil, class: 'btn' do
         Continuar

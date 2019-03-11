@@ -1,4 +1,4 @@
-.quotations
+#q1.quotations{ data: { id: params[:id] } }
   .container
     .breadcrumb
       = render_breadcrumbs separator: ' / '
@@ -6,7 +6,7 @@
     %h1 Cotizador
 
     %h3
-      Serán necesarios #{@quotation.trucks.length} camiones para la entrega de su pedido
+      A continuación se detallan los viajes a realizarse para la entrega de sus productos
     %p
       Puede
       %b arrastrar
@@ -23,23 +23,22 @@
           .columns.small-24.medium-12.large-8
             = link_to_add_association '<span>+ Agregar otro camión</span>'.html_safe, f, :trucks, class: 'add-truck'
 
-
         .info
           %h3
             Cada camión puede transportar:
 
-          - if @products.any?
-            .row.align-spaced
-              - @products.each_slice((@products.count / 4.0).ceil) do |slice|
-                .columns.small-20.medium-10.large-5
-                  - slice.each do |o|
+          - if @quotation_categories.any?
+            .row
+              - @quotation_categories.each do |quotation_category|
+                .columns.small-20.medium-10.large-4
+                  %strong= quotation_category.name
+                  - quotation_category.products.each do |o|
                     .row
-                      .columns.small-6
-                        %b= o.units_by_truck
-                      .columns.small-18
-                        %i= o.name
+                      .columns
+                        = "<b>#{o.units_by_truck}</b> <i>#{o.name}</i>".html_safe
 
         .row.align-center
           .columns.small-20.medium-6.large-4
+            = f.hidden_field :act, value: :u
             = f.button type: :submit, name: nil, class: 'btn' do
               Cotizar

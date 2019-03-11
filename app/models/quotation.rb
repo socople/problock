@@ -3,6 +3,7 @@ class Quotation < ApplicationRecord
   #
   enum status: %i[step1 step2]
   #
+  attr_accessor :act
   attr_accessor :expected_asap
   #
   has_many :trucks, -> { order_by_products }, dependent: :destroy
@@ -51,7 +52,7 @@ class Quotation < ApplicationRecord
                       .sort_by { |x| -x.pending }
   end
 
-  after_create :complete_info
+  after_save :complete_info
   #
   def complete_info
     accommodate_products
@@ -63,14 +64,14 @@ class Quotation < ApplicationRecord
   end
 
   def calculated_shipping_price
-    if (distance / 1000.0) + distance_extra <= Setting.fixed_price_distance
+    if (distance / 1000.0) + distance_extra.to_f <= Setting.fixed_price_distance
       return fixed_shipping_price
     end
     total_distance_price
   end
 
   def fixed_shipping_price
-    Setting.fixed_price_distance * trucks.count
+    Setting.fixed_price_price * trucks.count
   end
 
   def total_distance_price
@@ -85,7 +86,7 @@ class Quotation < ApplicationRecord
   end
 
   def distance_extra_price
-    return 0 if distance_extra.zero?
+    return 0 if distance_extra.to_f.zero?
     distance_extra * Setting.km_extra_price * trucks.count * 2
   end
 

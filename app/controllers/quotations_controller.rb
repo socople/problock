@@ -1,7 +1,11 @@
 #
 class QuotationsController < ApplicationController
   def new
-    @quotation = Quotation.new
+    @quotation = if params.key?(:o)
+                   Quotation.find params[:o]
+                 else
+                   Quotation.new
+                 end
 
     init_form
     add_breadcrumb 'Inicio', root_url
@@ -18,11 +22,7 @@ class QuotationsController < ApplicationController
 
   def edit
     @quotation = Quotation.find params[:id]
-    @products  = Product
-                 .includes(:quotation_category)
-                 .where('units_by_truck > 0')
-                 .order('quotation_categories.priority ASC,
-                   products.priority ASC')
+    init_form
   end
 
   def show
@@ -31,10 +31,24 @@ class QuotationsController < ApplicationController
 
   def update
     @quotation = Quotation.find params[:id]
-    @quotation.update_attributes(truck_params)
-    @quotation.cleanup!
 
-    redirect_to quotation_url(@quotation)
+    if @quotation.update_attributes(item_params)
+      @quotation.cleanup!
+      return redirect_to update_redirect_to_url
+    end
+
+    init_form
+    render update_render_action
+  end
+
+  def update_redirect_to_url
+    return quotation_url(@quotation) if item_params[:act] == 'u'
+    edit_quotation_url(@quotation)
+  end
+
+  def update_render_action
+    return { action: :edit } if item_params[:act] == 'u'
+    { action: :new }
   end
 
   def init_form
@@ -43,19 +57,13 @@ class QuotationsController < ApplicationController
 
   def item_params
     params.require(:quotation).permit(
-      :customer_name, :email, :phone, :cellphone, :address, :distance,
-      :distance_extra,
-      quotation_products_attributes: %i[id product_id quantity _destroy]
-    )
-  end
-
-  def truck_params
-    params.require(:quotation).permit(
+      :distance_extra, :customer_name, :phone, :cellphone, :address, :distance,
+      :email, :act,
+      quotation_products_attributes: %i[id product_id quantity _destroy],
       trucks_attributes: [
         :id, :quotation_id, :expected_asap, :expected_date, :_destroy,
-        truck_quotation_products_attributes: %i[
-          id truck_id quotation_product_id quantity _destroy
-        ]
+        truck_quotation_products_attributes: %i[id truck_id quotation_product_id
+                                                quantity _destroy]
       ]
     )
   end

@@ -14,9 +14,28 @@
 
 $ ->
 
+  if $('#q1').length > 0
+    history.pushState(null, null, '')
+    window.addEventListener 'popstate', (event) ->
+      window.location.assign("/quotations/new?o=#{$('#q1').data('id')}")
+
+  if $('#q2').length > 0
+    history.pushState(null, null, '')
+    window.addEventListener 'popstate', (event) ->
+      window.location.assign("/quotations/#{$('#q2').data('id')}/edit")
+
   $('#trucks').on 'cocoon:after-insert', (e, insertedItem) ->
     item = $(insertedItem)
     item.find('.truck').hqyDroppable droppableProps
+
+    item.find('.date-select-container').hide()
+    item.find('[type=radio]').on 'change', ->
+      container = $(this).closest('.truck').find('.date-select-container')
+      if $(this).val() == '0'
+        container.fadeIn()
+      else
+        container.fadeOut()
+
     checkEmpty()
     placeTruckCounter()
 
@@ -35,7 +54,7 @@ $ ->
   $('.truck-item .change').on 'click', (e) ->
     e.preventDefault()
 
-    item = $(this).closest('.truck-item')
+    item  = $(this).closest('.truck-item')
     input = item.find('.quantity')
     elemt = item.find('span')
     current_quantity = input.val()

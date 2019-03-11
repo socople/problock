@@ -34,6 +34,11 @@ showMapExample = true
       showExample()
       window.location.hash = 'quotation-map'
 
+    if document.getElementById('quotation_address')
+      address = document.getElementById('quotation_address').value
+      if address != ''
+        geocodeAddress(geocoder, map)
+
     directionsService = new google.maps.DirectionsService
     directionsDisplay = new google.maps.DirectionsRenderer({
       draggable: true,
@@ -51,6 +56,10 @@ showMapExample = true
 @geocodeAddress = (geocoder, resultsMap) ->
   address = document.getElementById('quotation_address').value
   return if address == ''
+
+  checkst = address.replace(/\s/g,'').toLowerCase()
+  if checkst.indexOf('elsalvador') == -1
+    address = address + ', El Salvador'
 
   geocoder.geocode { 'address': address }, (results, status) ->
     if status == 'OK'
