@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   resources :categories, only: %i[show]
   resources :contacts,   only: %i[new create]
 
-  resources :quotations
+  resources :quotations, except: %i[destroy] do
+    patch :confirm,   on: :member
+    get   :confirmed, on: :member
+  end
 
   resources :pages, only: [] do
     get 'quienes-somos', action: 'about', as: :about, on: :collection

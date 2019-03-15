@@ -20,12 +20,27 @@ class QuotationsController < ApplicationController
     render action: :new
   end
 
+  def confirm
+    @quotation = Quotation.find params[:id]
+    @quotation.update_attributes(confirm_params)
+
+    redirect_to confirmed_quotation_url(@quotation)
+  end
+
   def edit
     @quotation = Quotation.find params[:id]
+
+    return redirect_to confirmed_quotation_url(@quotation) unless
+                                                           @quotation.kind.nil?
     init_form
   end
 
   def show
+    @quotation = Quotation.find params[:id]
+    redirect_to confirmed_quotation_url(@quotation) unless @quotation.kind.nil?
+  end
+
+  def confirmed
     @quotation = Quotation.find params[:id]
   end
 
@@ -66,6 +81,10 @@ class QuotationsController < ApplicationController
                                                 quantity _destroy]
       ]
     )
+  end
+
+  def confirm_params
+    params.require(:quotation).permit(:kind)
   end
 
   def show_map?

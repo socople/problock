@@ -33,4 +33,19 @@ class LatteMailer < ApplicationMailer
          subject: 'Nuevo contacto desde problocksv.com',
          delivery_method_options: delivery_options
   end
+
+  def quotation_subject(quotation)
+    return 'Su cotización' if quotation.quotation?
+    'Detalles de su pedido'
+  end
+
+  def quotation(quotation)
+    @quotation = quotation
+
+    mail from: "#{Setting.inbox_name} <#{Setting.inbox_email}>",
+         to:   "#{quotation.customer_name} <#{quotation.email}>",
+         bcc:  "#{Setting.inbox_name} <#{Setting.inbox_email}>",
+         subject: quotation_subject(quotation),
+         delivery_method_options: delivery_options
+  end
 end

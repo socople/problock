@@ -1,7 +1,9 @@
+# rubocop:disable ClassLength
 #
 class Quotation < ApplicationRecord
   #
   enum status: %i[step1 step2]
+  enum kind:   %i[quotation request]
   #
   attr_accessor :act
   attr_accessor :expected_asap
@@ -37,6 +39,13 @@ class Quotation < ApplicationRecord
   validates :cellphone,
             presence: true,
             unless: proc { |o| o.phone.present? }
+
+  after_save :send_mail
+  #
+  def send_mail
+    return if kind.blank?
+    LatteMailer.quotation(self).deliver_now
+  end
 
   def products_total
     quotation_products.map(&:subtotal).sum

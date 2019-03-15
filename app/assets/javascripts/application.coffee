@@ -24,6 +24,15 @@ $ ->
     window.addEventListener 'popstate', (event) ->
       window.location.assign("/quotations/#{$('#q2').data('id')}/edit")
 
+  if $('#q3').length > 0
+    history.pushState(null, null, '')
+    window.addEventListener 'popstate', (event) ->
+      window.location.assign("/quotations/#{$('#q3').data('id')}")
+
+  $('#q2 form').on 'submit', (e) ->
+    unless confirm('Enviará la información necesaria para que podamos procesar su solicitud\n¿Desea continuar?')
+      e.preventDefault()
+
   $('#trucks').on 'cocoon:after-insert', (e, insertedItem) ->
     item = $(insertedItem)
     item.find('.truck').hqyDroppable droppableProps

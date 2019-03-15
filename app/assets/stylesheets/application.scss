@@ -900,6 +900,18 @@ form {
   padding: .8em 1em;
   text-align: center;
   text-transform: uppercase;
+
+  &.inverse {
+    background: $gray;
+    border: 1px darken($gray, 10%) solid;
+    border-radius: .4em;
+    color: $purple;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: $normal;
+    margin: 3em 0;
+    padding: 1.5em 1em;
+  }
 }
 
 .pages {

@@ -1,0 +1,32 @@
+#q3.quotations{ data: { id: params[:id] } }
+  .container
+    .breadcrumb
+      = render_breadcrumbs separator: ' / '
+
+    %h1 Cotizador
+
+    .notice.inverse
+      - if @quotation.quotation?
+        Hemos enviado su cotización a su dirección de correo
+        - if @quotation.updated_at + 1.minute > Time.zone.now
+          %b= @quotation.email
+        - else
+          electrónico
+        %br
+        Gracias por usar nuestro sistema de cotización
+      - else
+        Hemos recibido su información
+        %br
+        Nos pondremos en contacto con usted en un momento
+        %br
+        %br
+        Recibirá una copia de su pedido en su dirección de correo
+        - if @quotation.updated_at + 1.minute > Time.zone.now
+          %b= @quotation.email
+        - else
+          electrónico
+
+    .row.align-center
+      .columns.small-10.medium-6.large-4
+        = link_to root_url, class: 'btn' do
+          Ir al inicio

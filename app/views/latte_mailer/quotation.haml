@@ -1,0 +1,85 @@
+%html
+  %body{ style: 'font-family: sans-serif' }
+    %p
+      Buen día, esta es la información de su solicitud en ProBlock.
+
+    %strong
+      %i SU INFORMACIÓN
+    %br
+    %dl
+      %dt Nombre
+      %dd= @quotation.customer_name.blank? ? '- -' : @quotation.customer_name
+
+      %dt Email
+      %dd= @quotation.email.blank? ? '- -' : @quotation.email
+
+      %dt Teléfono fijo
+      %dd= @quotation.phone.blank? ? '- -' : @quotation.phone
+
+      %dt Teléfono celular
+      %dd= @quotation.cellphone.blank? ? '- -' : @quotation.cellphone
+
+    %br
+    %br
+    %strong
+      %i INFORMACIÓN PARA EL ENVÍO
+
+    %dl
+      %dt Dirección de entrega
+      %dd= @quotation.address.blank? ? '- -' : @quotation.address
+
+    %dl
+      %dt Distancia extra desde el punto "B"
+      %dd
+        - if @quotation.distance_extra.zero?
+          La entrega es exactamente en el punto "B"
+        - else
+          = "#{@quotation.distance_extra} km"
+
+    %br
+    %br
+    %strong
+      %i MATERIALES Y ENTREGAS
+
+
+    - counter = 0
+    - @quotation.trucks.each do |truck|
+      - counter += 1
+      %br
+      %dl
+        %dt
+          %strong= "Camión #{counter}"
+        %dd
+          - truck.truck_quotation_products.each do |o|
+            %div
+              &bull;
+              = raw "#{o.name_html}"
+      %dl
+        %dt
+          Fecha de entrega
+        %dd
+          - if truck.expected_asap?
+            Tan pronto como sea posible
+          - else
+            = I18n.l truck.expected_date, format: :localized
+
+    %br
+    %br
+    %strong
+      %i TOTALES
+
+    %br
+    %dl
+      %dt Total productos
+      %dd
+        %strong= number_to_currency @quotation.products_total
+
+    %dl
+      %dt Costo de envío
+      %dd
+        %strong= number_to_currency @quotation.shipping_price
+
+    %dl
+      %dt Total a cancelar
+      %dd
+        %strong= number_to_currency @quotation.total
