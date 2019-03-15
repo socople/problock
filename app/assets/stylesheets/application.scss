@@ -1022,7 +1022,7 @@ form {
     color: $red;
     font-size: .9em;
     font-style: italic;
-    margin: .5em 0 0;
+    margin: .5em 0;
   }
 
   .remove {
@@ -1195,6 +1195,7 @@ form {
   a {
     color: $purple;
     font-size: .8em;
+    font-weight: $bold;
     margin: 0 .5em 0 0;
     text-decoration: underline;
 

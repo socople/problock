@@ -63,9 +63,9 @@
   .control
     %strong
       ¿Cuántos kilómetros hay entre el lugar de entrega y el punto "B"?
-    = f.select :distance_extra, [0, 5, 10, 15].map { |o| ["#{o} km#{o.zero? ? ' (La entrega es exactamente en el punto "B")' : ''}", o] }, {}
     .red
-      En caso que el punto B no llegue hasta su obra, especifique cuantos kilómetros restan aproximadamente.
+      %b En caso que el punto B no llegue hasta su obra, especifique cuantos kilómetros restan aproximadamente.
+    = f.select :distance_extra, [0, 5, 10, 15].map { |o| ["#{o} km#{o.zero? ? ' (La entrega es exactamente en el punto "B")' : ''}", o] }, {}
 
   .row.align-center
     .columns.small-20.medium-6.large-4
