@@ -57,12 +57,12 @@ class QuotationsController < ApplicationController
   end
 
   def update_redirect_to_url
-    return quotation_url(@quotation) if item_params[:act] == 'u'
+    return quotation_url(@quotation) if @quotation.step2?
     edit_quotation_url(@quotation)
   end
 
   def update_render_action
-    return { action: :edit } if item_params[:act] == 'u'
+    return { action: :edit } if @quotation.step2?
     { action: :new }
   end
 
@@ -73,7 +73,7 @@ class QuotationsController < ApplicationController
   def item_params
     params.require(:quotation).permit(
       :distance_extra, :customer_name, :phone, :cellphone, :address, :distance,
-      :email, :act,
+      :email, :status,
       quotation_products_attributes: %i[id product_id quantity _destroy],
       trucks_attributes: [
         :id, :quotation_id, :expected_asap, :expected_date, :_destroy,

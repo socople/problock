@@ -5,9 +5,6 @@ class Quotation < ApplicationRecord
   enum status: %i[step1 step2]
   enum kind:   %i[quotation request]
   #
-  attr_accessor :act
-  attr_accessor :expected_asap
-  #
   has_many :trucks, -> { order_by_products }, dependent: :destroy
   accepts_nested_attributes_for :trucks,
                                 allow_destroy: true
@@ -100,6 +97,8 @@ class Quotation < ApplicationRecord
   end
 
   def accommodate_products
+    return if step2?
+
     qp = qp2accommodate
     while qp.any?
       distribute_products

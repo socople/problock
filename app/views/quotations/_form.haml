@@ -69,6 +69,5 @@
 
   .row.align-center
     .columns.small-20.medium-6.large-4
-      = f.hidden_field :act, value: :c
-      = f.button type: :submit, name: nil, class: 'btn' do
+      = f.button type: :submit, name: 'quotation[status]', value: :step1, class: 'btn' do
         Continuar

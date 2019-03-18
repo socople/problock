@@ -49,12 +49,19 @@ $ ->
     checkEmpty()
     placeTruckCounter()
 
-  $('#trucks').on 'cocoon:before-remove', (e, insertedItem) ->
+  $('#trucks').on 'cocoon:before-remove', (e, itemToRemove) ->
     message = 'Eliminará el camión y todos los productos en él\n¿Está seguro?'
     if $(e.target).hasClass('products-list')
       message = 'Eliminará este producto del camión\n¿Está seguro?'
     if !confirm(message)
       e.preventDefault()
+    else
+      if itemToRemove.find('.dynamic').length > 0
+        itemToRemove.find("[name*='_destroy']").val('1')
+        itemToRemove
+          .find('.truck-item')
+          .hide()
+          .appendTo(itemToRemove.parent())
 
   $('#trucks').on 'cocoon:after-remove', ->
     checkOverloaded()

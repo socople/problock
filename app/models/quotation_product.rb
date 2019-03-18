@@ -3,7 +3,7 @@ class QuotationProduct < ApplicationRecord
   #
   belongs_to :product
   belongs_to :quotation
-  has_many :truck_quotation_products
+  has_many :truck_quotation_products, dependent: :destroy
 
   validates :product_id, presence: true
 
