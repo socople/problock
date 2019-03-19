@@ -10,4 +10,7 @@
 
     = link_to_remove_association 'Quitar del camión', f, class: 'delete-truck-item'
 
+    = link_to nil, class: 'split' do
+      Dividir material
+
   %small= raw "#{f.object.name_html}"

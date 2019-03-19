@@ -70,16 +70,20 @@ $ ->
 
   $('.truck-item .change').on 'click', (e) ->
     e.preventDefault()
+    changeQuantity($(this))
 
-    item  = $(this).closest('.truck-item')
+  changeQuantity = (truck_item) ->
+    item  = truck_item.closest('.truck-item')
     input = item.find('.quantity')
     elemt = item.find('span')
     current_quantity = input.val()
 
     new_quantity = prompt('Ingrese la nueva cantidad', current_quantity)
-    if new_quantity == null || (parseInt(new_quantity) + '') != new_quantity || new_quantity < 1
-      new_quantity = current_quantity
+    return if new_quantity == null
+
+    if (parseInt(new_quantity) + '') != new_quantity || new_quantity < 1
       alert 'No se cambió la cantidad porque debe introducir un número entero mayor que cero'
+      return
 
     new_percent = parseFloat(item.data('percent')) /
                   parseInt(current_quantity) *
@@ -126,6 +130,69 @@ $ ->
             .addClass('disabled')
             .attr('disabled', true)
     ), 100
+
+  cloneTruckItem = (org) ->
+
+    truck = org.closest('.truck')
+    item  = org.clone()
+    elemt = item.find('span')
+    quantity_input     = item.find('.quantity')
+    current_quantity   = quantity_input.val()
+    suggested_quantity = Math.floor(parseFloat(current_quantity) / 2)
+
+    new_quantity = prompt('¿Cuántas unidades desea dividir?', suggested_quantity)
+    return if new_quantity == null
+
+    if (parseInt(new_quantity) + '') != new_quantity || new_quantity < 1
+      alert 'Debe introducir un número entero mayor que cero'
+      return
+    else if parseInt(current_quantity) <= new_quantity
+      alert "Debe introducir un número menor que #{current_quantity}"
+      return
+
+    reference_input = truck.find('[name$="[_destroy]"]').not('[name*=truck_quotation_products_attributes]')
+    truck_index     = reference_input.attr('name').match(/\[trucks_attributes\]\[(.*?)\]\[/)[1]
+    item_index      = new Date().getTime()
+
+    item.find("[name*='[id]']").remove()
+
+    setNameFor(item, truck_index, item_index, 'truck_id')
+    setNameFor(item, truck_index, item_index, 'quotation_product_id')
+    setNameFor(item, truck_index, item_index, 'quantity')
+    setNameFor(item, truck_index, item_index, '_destroy')
+
+    setQuantityAndPercent(org, (parseInt(current_quantity) - parseInt(new_quantity)))
+    setQuantityAndPercent(item, new_quantity)
+
+    org.after(item)
+    item.hqyDraggable draggableProps
+
+    item.find('.change').on 'click', (e) ->
+      e.preventDefault()
+      changeQuantity($(this))
+
+    item.find('.split').on 'click', (e) ->
+      e.preventDefault()
+      cloneTruckItem(item)
+
+  $('.split').on 'click', (e) ->
+    e.preventDefault()
+    cloneTruckItem($(this).closest('.truck-item'))
+
+  setQuantityAndPercent = (truck_item, new_quantity) ->
+    input            = truck_item.find('.quantity')
+    elemt            = truck_item.find('span')
+    current_quantity = input.val()
+    new_percent      = parseFloat(truck_item.data('percent')) /
+                       parseInt(current_quantity) *
+                       parseInt(new_quantity)
+
+    new_percent = Math.round(new_percent * 10000) / 10000
+
+    truck_item.data('percent', new_percent)
+    truck_item.attr('data-percent', new_percent)
+    input.val(new_quantity)
+    elemt.text(new_quantity)
 
   setTruckIds = (item) ->
     setTimeout (->
