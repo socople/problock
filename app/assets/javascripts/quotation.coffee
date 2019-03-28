@@ -68,6 +68,10 @@ showMapExample = true
       displayRoute(startpoint, defaultend, directionsService, directionsDisplay)
 
 @displayRoute = (startpoint, destination, service, display) ->
+
+  document.getElementById('quotation_latitude').value = destination.lat()
+  document.getElementById('quotation_longitude').value = destination.lng()
+
   service.route {
     origin: startpoint,
     destination: destination,
