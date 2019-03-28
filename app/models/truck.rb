@@ -23,4 +23,17 @@ class Truck < ApplicationRecord
   def set_expected_date!
     self.expected_date = nil if expected_asap?
   end
+
+  def expected_date_s
+    return 'Tan pronto como sea posible' if expected_asap?
+    I18n.l expected_date, format: :localized
+  end
+
+  def sendgrid_data
+    {
+      number: quotation.trucks.index(self) + 1,
+      expected_date: expected_date_s,
+      truck_quotation_products: truck_quotation_products.map(&:sendgrid_data)
+    }
+  end
 end

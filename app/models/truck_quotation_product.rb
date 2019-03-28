@@ -20,4 +20,13 @@ class TruckQuotationProduct < ApplicationRecord
     q = ["<span>#{quantity}</span>", u].join(' ')
     [q, quotation_product.name].join(' de ')
   end
+
+  def sendgrid_data
+    {
+      quantity: quantity,
+      quotation_product: {
+        name: quotation_product.name
+      }
+    }
+  end
 end

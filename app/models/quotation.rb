@@ -41,7 +41,23 @@ class Quotation < ApplicationRecord
   #
   def send_mail
     return if kind.blank?
-    LatteMailer.quotation(self).deliver_now
+    # LatteMailer.quotation(self).deliver_now
+
+    [email, Setting.inbox_email].each do |to|
+      mail = Sendgrid.new(
+        from: "#{Setting.inbox_name} <#{Setting.inbox_email}>",
+        to: to,
+        template_id: mail_template_id
+      )
+
+      mail.setup_dynamic_template_data sendgrid_data
+      mail.send
+    end
+  end
+
+  def mail_template_id
+    return 'd-a2e7882e6187469e9d379c423a41d229' if quotation?
+    'd-f0e07454c2254dc9b1c24622d28700a2'
   end
 
   def products_total
@@ -138,5 +154,36 @@ class Quotation < ApplicationRecord
         o.update_column :quantity, o.truck_quotation_products.sum(:quantity)
       end
     end
+  end
+
+  def distance_extra_s
+    return 'La entrega es exactamente en el punto "B"' if distance_extra.zero?
+    "#{distance_extra} km"
+  end
+
+  def reference_point_s
+    return 'N/A' if reference_point.blank?
+    reference_point
+  end
+
+  def sendgrid_data
+    {
+      customer_name: customer_name, address: address,
+      products_total: number_helper.number_to_currency(products_total),
+      shipping_price: number_helper.number_to_currency(shipping_price),
+      total: number_helper.number_to_currency(total),
+      reference_point: reference_point_s,
+      distance_extra: distance_extra_s,
+      latitude: latitude, longitude: longitude,
+      trucks: trucks.map(&:sendgrid_data)
+    }
+  end
+
+  private
+
+  def number_helper
+    @helper ||= Class.new do
+      include ActionView::Helpers::NumberHelper
+    end.new
   end
 end
