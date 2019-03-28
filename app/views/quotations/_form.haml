@@ -43,8 +43,8 @@
   .row
     .columns.small-24
       .control
-        %strong Dirección
-        = f.text_field :address, autocomplete: :off
+        %strong Dirección completa
+        = f.text_field :address, autocomplete: :off, placeholder: 'Colonia, calle o pasaje, número de casa, ciudad, departamento'
 
   .control
     %strong
@@ -59,6 +59,12 @@
           %p Arrastre el punto "B" hasta el lugar de entrega, si es necesario.
           = image_tag 'move-b-example.gif'
           = link_to 'Entendido', nil, class: 'btn', data: { close: 'move-b-example' }
+
+  .row
+    .columns.small-24
+      .control
+        %strong Punto de referencia
+        = f.text_field :reference_point, placeholder: '100 metros después de... Esquina opuesta a...'
 
   .control
     %strong
