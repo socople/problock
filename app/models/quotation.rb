@@ -115,11 +115,14 @@ class Quotation < ApplicationRecord
   def accommodate_products
     return if step2?
 
+    trucks.destroy_all
     qp = qp2accommodate
     while qp.any?
       distribute_products
       qp = qp2accommodate
     end
+
+    redistribute!
   end
 
   def distribute_products
@@ -140,13 +143,13 @@ class Quotation < ApplicationRecord
   end
 
   def remove_unused_trucks!
-    trucks.each do |o|
+    trucks.reload.each do |o|
       o.destroy unless o.truck_quotation_products.reload.any?
     end
   end
 
   def refresh_quantities!
-    quotation_products.each do |o|
+    quotation_products.reload.each do |o|
       q = o.truck_quotation_products.sum(:quantity)
       if q.zero?
         o.destroy
@@ -177,6 +180,22 @@ class Quotation < ApplicationRecord
       latitude: latitude, longitude: longitude,
       trucks: trucks.map(&:sendgrid_data)
     }
+  end
+
+  def truck_to_redistribute
+    truck = trucks.find(&:can_be_divided_equality?)
+    truck = trucks.find(&:less_used?) if truck.nil?
+
+    truck
+  end
+
+  def redistribute!
+    return unless trucks.any?(&:can_be_divided_in_others?)
+
+    truck = truck_to_redistribute
+    return if truck.nil?
+
+    truck.redistribute!
   end
 
   private

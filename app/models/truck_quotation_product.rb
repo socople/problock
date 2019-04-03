@@ -29,4 +29,8 @@ class TruckQuotationProduct < ApplicationRecord
       }
     }
   end
+
+  def percent_to_quantity(percent)
+    quotation_product.product.units_by_truck * percent / 100
+  end
 end

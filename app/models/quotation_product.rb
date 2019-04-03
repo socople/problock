@@ -31,8 +31,7 @@ class QuotationProduct < ApplicationRecord
   def truck_to_fit
     return nil if quotation.trucks.empty?
     quotation.trucks.each do |truck|
-      return truck if truck.accommodated_products_percent +
-                      percent_in_truck <= 100
+      return truck if truck.used_percent + percent_in_truck <= 100
     end
     nil
   end
