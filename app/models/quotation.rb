@@ -104,7 +104,7 @@ class Quotation < ApplicationRecord
   end
 
   def distance_price
-    (Setting.fixed_price_distance +
+    (Setting.fixed_price_price +
       (distance / 1000.0 * Setting.km_price * 2)
     ) * trucks.count
   end
