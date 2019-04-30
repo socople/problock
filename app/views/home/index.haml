@@ -9,12 +9,12 @@
         .row.align-justify
           - unless main_category.nil?
             .columns.small-24.medium-24.large-11
-              = link_to category_url(main_category), class: 'btn' do
+              = link_to category_url(main_category), class: 'btn flat' do
                 Ver materiales
 
           .columns.small-24.medium-24.large-11
-            = link_to new_contact_url, class: 'btn flat' do
-              Solicitar cotización
+            = link_to new_quotation_url, class: 'btn' do
+              Cotizar en línea
 
 .home-2
   .container
