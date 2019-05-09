@@ -40,6 +40,9 @@
       .row.align-justify
         .columns.small-18
           %strong Costo de envío
+          - count = @quotation.trucks.count
+          %small= "#{count} #{count > 1 ? 'camiones' : 'camión'}"
+          -# %small (#{count} #{count > 1 ? 'camiones' : 'camión'} x #{number_to_currency(@quotation.shipping_price_by_truck, precision: 3)})
         .columns.small-3
           = number_to_currency @quotation.shipping_price
       .row.align-justify

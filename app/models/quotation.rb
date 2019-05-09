@@ -85,6 +85,10 @@ class Quotation < ApplicationRecord
     update_column :shipping_price, calculated_shipping_price
   end
 
+  def shipping_price_by_truck
+    shipping_price / trucks.count
+  end
+
   def calculated_shipping_price
     if (distance / 1000.0) + distance_extra.to_f <= Setting.fixed_price_distance
       return fixed_shipping_price
