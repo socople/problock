@@ -2,7 +2,16 @@
   .container
     .breadcrumb
       = render_breadcrumbs separator: ' / '
-
-    %h1 Cotizador
-
+    .row.align-justify
+      .columns.small-24.medium-6
+        %h1 Cotizador
+      .columns.small-24.medium-6
+        = link_to 'Ver como cotizar', nil, data: { open: 'dummy' }, class: 'btn'
+    .overlay{ class: (false ? 'visible' : nil), data: { overlay: 'dummy' }}
+      .popup
+        = link_to 'x', nil, class: 'close', data: { close: 'dummy' }
+        .container
+          .video
+            %iframe{ src: 'https://www.youtube.com/embed/m2znQefFz5w', frameborder: 0, allow: 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen' }
+    
     = render partial: 'form'

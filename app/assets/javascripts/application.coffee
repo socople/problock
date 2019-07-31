@@ -303,6 +303,18 @@ $ ->
         $('body').addClass('noscroll')
       else
         $('body').removeClass('noscroll')
+  
+    $('[data-open]').on 'click', (e) ->
+    e.preventDefault()
+
+
+  $('[data-open]').on 'click', (e) ->
+    e.preventDefault()
+    $("[data-overlay='#{$(this).data('open')}']").fadeIn()
+
+  $('[data-close]').on 'click', (e) ->
+    e.preventDefault()
+    $("[data-overlay='#{$(this).data('close')}']").fadeOut()
 
 @initMap = ->
   if document.getElementById("map")
@@ -320,3 +332,4 @@ $ ->
     infowindow = new google.maps.InfoWindow()
     infowindow.setContent("ProBlock")
     infowindow.open(map, marker)
+
