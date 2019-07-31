@@ -332,4 +332,3 @@ $ ->
     infowindow = new google.maps.InfoWindow()
     infowindow.setContent("ProBlock")
     infowindow.open(map, marker)
-
