@@ -215,7 +215,7 @@ GEM
     puma (3.7.1-java)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
-    rack (2.0.3)
+    rack (2.2.3)
     rack-protection (2.0.5)
       rack
     rack-test (0.6.3)
