@@ -80,7 +80,7 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    chartkick (2.2.5)
+    chartkick (3.4.0)
     choice (0.2.0)
     ckeditor (4.2.4)
       cocaine
@@ -361,7 +361,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
-  chartkick (~> 2.2.3)
+  chartkick (~> 3.4.0)
   ckeditor (~> 4.2.3)
   cocoon (~> 1.2.10)
   coffee-rails (~> 4.2)

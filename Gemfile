@@ -57,7 +57,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'activemodel-serializers-xml', '~> 1.0.2'
 gem 'angularjs-rails', '~> 1.6.2'
 gem 'breadcrumbs_on_rails', '~> 3.0.1'
-gem 'chartkick', '~> 2.2.3'
+gem 'chartkick', '~> 3.4.0'
 gem 'ckeditor', '~> 4.2.3'
 gem 'cocoon', '~> 1.2.10'
 gem 'devise', '~> 4.3.0'
